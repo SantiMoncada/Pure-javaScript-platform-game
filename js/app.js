@@ -12,9 +12,17 @@ const platformGame = {
     fps: 60,
     init(canvasId) {
         this.ctx = document.querySelector(canvasId).getContext('2d');
+
         this.setDimensions(canvasId);
 
+        //this.ctx.save()                       *see gravity, trying to find issue tried with this.
+
+        this.player = new Player(this.ctx, this.canvasSize, 50, 460, 40, 40)
+
         this.floor = new Block(this.ctx, this.canvasSize, 0, 500, 2000, 200, 'gray');
+
+
+        this.createEventListeners()
 
         this.drawAll();
     },
@@ -27,9 +35,32 @@ const platformGame = {
         document.querySelector(canvasId).setAttribute('height', this.canvasSize.h)
 
     },
+    createEventListeners() {
+        document.onkeydown = e => {
+            const { key } = e
+            switch (key) {
+                case 'ArrowLeft':
+                    this.player.moveLeft()
+                    break;
+                case 'ArrowRight':
+                    this.player.moveRight()
+                    break;
+                case 'ArrowUp':
+                    this.player.jump()
+                    break;
+
+
+            }
+        }
+
+    },
     drawAll() {
         setInterval(() => {
+
+            this.clearAll()
             this.floor.draw();
+            this.player.draw()
+
         }, 1000 / this.fps)
     },
     clearAll() {
