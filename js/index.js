@@ -1,3 +1,3 @@
 window.onload = () => {
-    raceGameApp.init('#canvas');
+    platformGame.init('#canvas');
 };

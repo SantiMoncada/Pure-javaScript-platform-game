@@ -12,14 +12,17 @@ const platformGame = {
     init(canvasId) {
         this.ctx = document.querySelector(canvasId).getContext('2d');
         this.setDimensions(canvasId);
+        this.ctx.fillStyle = 'red';
+        this.ctx.fillRect(0, 0, this.canvasSize.w, this.canvasSize.h);
+        console.log(this.canvasSize)
     },
     setDimensions(canvasId) {
         this.canvasSize = {
             w: window.innerWidth,
             h: window.innerHeight,
         }
-        this.ctx.setAttribute('width', this.canvasSize.w)
-        this.ctx.setAttribute('height', this.canvasSize.h)
+        document.querySelector(canvasId).setAttribute('width', this.canvasSize.w)
+        document.querySelector(canvasId).setAttribute('height', this.canvasSize.h)
 
     }
 }
