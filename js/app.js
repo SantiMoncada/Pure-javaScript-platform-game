@@ -9,6 +9,7 @@ const platformGame = {
         w: undefined,
         h: undefined
     },
+    keysPressed: { up: false, left: false, right: false },
     fps: 60,
     init(canvasId) {
         this.ctx = document.querySelector(canvasId).getContext('2d');
@@ -17,10 +18,12 @@ const platformGame = {
 
         //this.ctx.save()                       *see gravity, trying to find issue tried with this.
 
-        this.player = new Player(this.ctx, this.canvasSize, 50, 460, 40, 40),
+        this.player = new Player(this.ctx, this.canvasSize, 50, 460, 40, 40);
 
-            this.floor = new Block(this.ctx, this.canvasSize, 0, 500, 2000, 50, 'gray');
-
+        //TEMP Move to -> level
+        this.blocks = [];
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 0, 500, 2000, 50, 'gray'));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, this.canvasSize.w / 2, 250, this.canvasSize.h / 2, 50, "purple"));
 
         this.createEventListeners()
 
@@ -40,26 +43,57 @@ const platformGame = {
             const { key } = e
             switch (key) {
                 case 'ArrowLeft':
-                    this.player.moveLeft()
+                    this.keysPressed.left = true;
                     break;
                 case 'ArrowRight':
-                    this.player.moveRight()
+                    this.keysPressed.right = true;
                     break;
                 case 'ArrowUp':
-                    this.player.jump()
+                    this.keysPressed.up = true;
                     break;
 
 
             }
         }
+        document.onkeyup = e => {
+            const { key } = e
+            switch (key) {
+                case 'ArrowLeft':
+                    this.keysPressed.left = false;
+                    break;
+                case 'ArrowRight':
+                    this.keysPressed.right = false;
+                    break;
+                case 'ArrowUp':
+                    this.keysPressed.up = false;
 
+                    break;
+
+
+            }
+        }
+    },
+    updateInput() {
+        if (this.keysPressed.up) {
+            this.player.jump();
+        }
+        if (this.keysPressed.left) {
+            this.player.moveLeft();
+        }
+        if (this.keysPressed.right) {
+            this.player.moveRight();
+        }
     },
     drawAll() {
         setInterval(() => {
+            this.updateInput();
+            this.clearAll();
 
-            this.clearAll()
-            this.floor.draw();
-            this.player.draw()
+            this.blocks.forEach(block => {
+                block.draw();
+            });
+            this.player.updateJump();
+            this.player.draw();
 
         }, 1000 / this.fps)
     },

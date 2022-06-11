@@ -8,7 +8,7 @@ class Player {
 
         this.basePos = this.playerPos.y
 
-        this.jumpForce = 10
+        this.jumpForce = 15
         //this.playerImage
         this.physics = { gravity: .4 }//harcoded gravity, check if change later, is affecting x axis as well when moving
 
@@ -22,39 +22,35 @@ class Player {
     }
     updateJump() {
 
-
         this.playerPos.y += this.playerSpeed.y;
-        this.playerSpeed.y += this.physics.gravity;
-        console.log(this.playerSpeed.y)
-        // //this.playerPos.y -= 40 //S: Dont know waht this does
-        // if (this.playerPos.y < this.basePos) {                   //tries for jump, this one first elevates it with gravity,
-        //     //is on the air
-        //     this.playerPos.y += this.playerSpeed.y;              //then dissappears
-        //     this.playerSpeed.y += this.gravity;
-        // } else {
-        //     console.log("updating jump")
-        //     //is on the ground
-        //     this.playerPos.y = this.basePos;
-        //     this.playerSpeed.y = 1;
-        // }
-        // //this.playerSpeed.y -= 8
-        // // this.playerSpeed.y += this.physics.gravity
-        // // if (this.playerPos.y >= 450) {
-        // //     this.playerSpeed.y = 0
-        // // }
+
+        if (this.playerPos.y >= this.basePos) {
+            //if he is on the gorund
+            this.playerSpeed.y = 0;
+            this.playerPos.y = this.basePos
+            console.log(this.playerPos.y);
+
+        } else {
+            this.playerSpeed.y += this.physics.gravity;
+
+        }
+
 
     }
     jump() {
+        if (this.playerPos.y >= this.basePos) {
+            this.playerPos.y -= 1
+            this.playerSpeed.y -= this.jumpForce;
 
-        //this.playerPos.y -= 1
-        this.playerSpeed.y -= this.jumpForce;
+        }
 
 
     }
     draw() {
-        this.updateJump();
+
         this.ctx.fillStyle = 'red';
         this.ctx.fillRect(this.playerPos.x, this.playerPos.y, this.playerSize.w, this.playerSize.h);
+
     }
     moveRight() {
         this.playerPos.x += this.playerSpeed.x
@@ -63,6 +59,10 @@ class Player {
 
     moveLeft() {
         this.playerPos.x -= this.playerSpeed.x
+    }
+    isGrounded(blocks) {
+
+
     }
 
 }
