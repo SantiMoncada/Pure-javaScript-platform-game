@@ -5,10 +5,12 @@ class Player {
         this.playerPos = { x: playerPosX, y: playerPosY }
         this.playerSize = { w: playerWidth, h: playerHeight }
         this.playerSpeed = { x: 10, y: 0 };
+        this.previousPos = { x: undefined, y: undefined }
         this.jumping = false;
         this.jumpForce = 15
         //this.playerImage
-        this.physics = { gravity: .4 }//harcoded gravity, check if change later, is affecting x axis as well when moving
+        this.physics = { gravity: .4 }
+
 
         this.init()
     }
@@ -18,11 +20,12 @@ class Player {
 
 
     }
-    updateJump(keyUp, blocks) {
-
-
+    updatePhysics(keyUp, blocks) {
         this.playerPos.y += this.playerSpeed.y;
+
         const basePos = this.isGrounded(blocks);
+
+        console.log("is gorunded: ", basePos);
         if (basePos) {
             //if he is on the gorund
             this.playerSpeed.y = 0;
@@ -30,20 +33,20 @@ class Player {
             this.jumping = false;
         } else {
             //player is on the air
-
             const blockPos = this.checkBlock(blocks);
             if (!blockPos.down) {
                 this.playerSpeed.y += this.physics.gravity;
             } else {
                 //if there is a block on top;
                 this.playerSpeed.y *= -1;
+
                 this.playerPos.y = blockPos.down;
             }
 
         }
 
 
-        if (!keyUp && this.jumping) {
+        if (!keyUp && this.jumping && this.playerSpeed.y < 0) {
             this.jumping = false;
             this.playerSpeed.y *= 0.2;
         };
@@ -52,6 +55,7 @@ class Player {
     }
     jump(blocks) {
         if (this.isGrounded(blocks)) {
+
             this.playerPos.y -= 1
             this.playerSpeed.y -= this.jumpForce;
             this.jumping = true;
@@ -68,12 +72,17 @@ class Player {
     }
     moveRight(blocks) {
 
-        const leftPos = this.checkBlock(blocks).left;
-        if (!leftPos) {
-            this.playerPos.x += this.playerSpeed.x;
-        } else {
-            this.playerPos.x = leftPos - this.playerSize.w;
-        }
+        this.playerPos.x += this.playerSpeed.x;
+
+        // this.previousPos = { ...this.playerPos };
+
+        // this.playerPos.x += this.playerSpeed.x;
+
+        // const pos = this.checkForCollision(blocks);
+
+        // if (pos.x) {
+        //     this.playerPos.x = pos.x;
+        // }
     }
 
     moveLeft() {
@@ -86,16 +95,16 @@ class Player {
 
         for (const block of blocks) {
             //check for horizontal grounding
-            if (this.playerPos.y + this.playerSize.h >= block.pos.y && this.playerPos.y + this.playerSize.h < block.pos.y + block.size.h) {
+            if (!(this.playerPos.x + this.playerSize.w <= block.pos.x || this.playerPos.x >= block.pos.x + block.size.w)) {
                 //check for vertical gorunding
-                if (!(this.playerPos.x + this.playerSize.w < block.pos.x || this.playerPos.x > block.pos.x + block.size.w)) {
+                if (this.playerPos.y + this.playerSize.h >= block.pos.y && this.playerPos.y + this.playerSize.h < block.pos.y + block.size.h) {
+
 
                     output = block.pos.y;
                     break;
                 }
             }
         }
-
         return output;
     }
     //checks for collision with the bottom of a block
@@ -110,6 +119,23 @@ class Player {
                     break;
                 }
             }
+        }
+        return output;
+    }
+
+    checkForCollision(blocks) {
+        let output = { x: 0, y: 0 };
+        for (const block of blocks) {
+
+            if (block.pos.x < this.playerPos.x + this.playerSize.w &&
+                block.pos.x + block.size.w > this.playerPos.x &&
+                block.pos.y < this.playerPos.y + this.playerSize.h &&
+                block.size.h + block.pos.y > this.playerPos.y) {
+
+
+                output = { ...this.previousPos };
+            }
+
         }
         return output;
     }

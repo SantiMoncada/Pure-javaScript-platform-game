@@ -24,7 +24,8 @@ const platformGame = {
         this.blocks = [];
         this.blocks.push(new Block(this.ctx, this.canvasSize, 0, this.canvasSize.h - 50, this.canvasSize.w, 50, 'gray'));
         this.blocks.push(new Block(this.ctx, this.canvasSize, 500, 700, 500, 30, "purple"));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 1200, this.canvasSize.h - 350, 30, 300, "brown"));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 1200, this.canvasSize.h - 250, 30, 200, "brown"));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 1200, 100, 30, 400, "yellow"));
 
 
         this.createEventListeners()
@@ -91,11 +92,10 @@ const platformGame = {
         setInterval(() => {
             this.updateInput();
             this.clearAll();
-            this.player.isGrounded(this.blocks); // test delete pls
             this.blocks.forEach(block => {
                 block.draw();
             });
-            this.player.updateJump(this.keysPressed.up, this.blocks);
+            this.player.updatePhysics(this.keysPressed.up, this.blocks);
             this.player.draw();
 
         }, 1000 / this.fps)
