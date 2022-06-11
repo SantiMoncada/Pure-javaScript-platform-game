@@ -22,8 +22,10 @@ const platformGame = {
 
         //TEMP Move to -> level
         this.blocks = [];
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 0, 500, 2000, 50, 'gray'));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, this.canvasSize.w / 2, 250, this.canvasSize.h / 2, 50, "purple"));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 0, this.canvasSize.h - 50, this.canvasSize.w, 50, 'gray'));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 500, 700, 500, 30, "purple"));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 1200, this.canvasSize.h - 350, 30, 300, "brown"));
+
 
         this.createEventListeners()
 
@@ -74,25 +76,26 @@ const platformGame = {
         }
     },
     updateInput() {
-        if (this.keysPressed.up) {
-            this.player.jump();
-        }
+
         if (this.keysPressed.left) {
-            this.player.moveLeft();
+            this.player.moveLeft(this.blocks);
         }
         if (this.keysPressed.right) {
-            this.player.moveRight();
+            this.player.moveRight(this.blocks);
+        }
+        if (this.keysPressed.up) {
+            this.player.jump(this.blocks);
         }
     },
     drawAll() {
         setInterval(() => {
             this.updateInput();
             this.clearAll();
-
+            this.player.isGrounded(this.blocks); // test delete pls
             this.blocks.forEach(block => {
                 block.draw();
             });
-            this.player.updateJump();
+            this.player.updateJump(this.keysPressed.up, this.blocks);
             this.player.draw();
 
         }, 1000 / this.fps)
