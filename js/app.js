@@ -22,9 +22,9 @@ const platformGame = {
 
         //TEMP Move to -> level
         this.blocks = [];
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 1200, this.canvasSize.h - 250, 30, 200, "brown"));
         this.blocks.push(new Block(this.ctx, this.canvasSize, 0, this.canvasSize.h - 50, this.canvasSize.w, 50, 'gray'));
         this.blocks.push(new Block(this.ctx, this.canvasSize, 500, 700, 500, 30, "purple"));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 1200, this.canvasSize.h - 250, 30, 200, "brown"));
         this.blocks.push(new Block(this.ctx, this.canvasSize, 1200, 100, 30, 400, "yellow"));
 
 
@@ -37,8 +37,8 @@ const platformGame = {
             w: window.innerWidth,
             h: window.innerHeight,
         }
-        document.querySelector(canvasId).setAttribute('width', this.canvasSize.w)
-        document.querySelector(canvasId).setAttribute('height', this.canvasSize.h)
+        document.querySelector(canvasId).setAttribute('width', this.canvasSize.w-10)
+        document.querySelector(canvasId).setAttribute('height', this.canvasSize.h-10)
 
     },
     createEventListeners() {
@@ -71,8 +71,6 @@ const platformGame = {
                     this.keysPressed.up = false;
 
                     break;
-
-
             }
         }
     },
