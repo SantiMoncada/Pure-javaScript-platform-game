@@ -84,16 +84,15 @@ const platformGame = {
         if (this.keysPressed.right) {
             this.player.moveRight(this.blocks);
         }
-
     },
     drawAll() {
         setInterval(() => {
-            this.updateInput();
             this.clearAll();
+            this.updateInput();
+            this.player.updatePhysics(this.keysPressed.up, this.blocks);
             this.blocks.forEach(block => {
                 block.draw();
             });
-            this.player.updatePhysics(this.keysPressed.up, this.blocks);
             this.player.draw();
 
         }, 1000 / this.fps)

@@ -1,22 +1,21 @@
 class Player {
     constructor(ctx, canvasSize, playerPosX, playerPosY, playerWidth, playerHeight) {
-        this.ctx = ctx
-        this.canvasSize = canvasSize
-        this.playerPos = { x: playerPosX, y: playerPosY }
-        this.playerSize = { w: playerWidth, h: playerHeight }
+        this.ctx = ctx;
+        this.canvasSize = canvasSize;
+        this.playerPos = { x: playerPosX, y: playerPosY };
+        this.playerSize = { w: playerWidth, h: playerHeight };
         this.playerSpeed = { x: 10, y: 0 };
         this.jumping = false;
-        this.jumpForce = 15
+        this.jumpForce = 15;
+        this.physics = { gravity: .4 , drag : .4};
         //this.playerImage
-        this.physics = { gravity: .4 , drag : .4}
 
 
-        this.init()
+        this.init();
     }
     init() {
         // this.imageInstance = new Image()                                 For images
         // this.imageInstance.src = this.playerImg
-
 
     }
     draw() {
@@ -53,7 +52,6 @@ class Player {
 
     }
     jump(blocks) {
-
         if(this.isGrounded(blocks)){
             this.playerPos.y -= 1;
             this.playerSpeed.y -= this.jumpForce;
