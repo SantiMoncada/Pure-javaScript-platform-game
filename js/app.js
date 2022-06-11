@@ -17,9 +17,9 @@ const platformGame = {
 
         //this.ctx.save()                       *see gravity, trying to find issue tried with this.
 
-        this.player = new Player(this.ctx, this.canvasSize, 50, 460, 40, 40)
+        this.player = new Player(this.ctx, this.canvasSize, 50, 460, 40, 40),
 
-        this.floor = new Block(this.ctx, this.canvasSize, 0, 500, 2000, 200, 'gray');
+            this.floor = new Block(this.ctx, this.canvasSize, 0, 500, 2000, 50, 'gray');
 
 
         this.createEventListeners()
