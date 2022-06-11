@@ -75,16 +75,16 @@ const platformGame = {
         }
     },
     updateInput() {
-
+        if (this.keysPressed.up) {
+            this.player.jump(this.blocks);
+        }
         if (this.keysPressed.left) {
             this.player.moveLeft(this.blocks);
         }
         if (this.keysPressed.right) {
             this.player.moveRight(this.blocks);
         }
-        if (this.keysPressed.up) {
-            this.player.jump(this.blocks);
-        }
+
     },
     drawAll() {
         setInterval(() => {

@@ -5,11 +5,10 @@ class Player {
         this.playerPos = { x: playerPosX, y: playerPosY }
         this.playerSize = { w: playerWidth, h: playerHeight }
         this.playerSpeed = { x: 10, y: 0 };
-        this.previousPos = {...this.playerPos}
         this.jumping = false;
         this.jumpForce = 15
         //this.playerImage
-        this.physics = { gravity: .4 }
+        this.physics = { gravity: .4 , drag : .4}
 
 
         this.init()
@@ -47,14 +46,11 @@ class Player {
         //and set the speed to 0 and the pos to rigth place and jumnping to false
         //if not chech if there is a block on top to continue the sim or stop
 
-
-
         if (!keyUp && this.jumping && this.playerSpeed.y < 0) {
             this.jumping = false;
             this.playerSpeed.y *= 0.2;
         };
 
-        this.previousPos = {...this.playerPos};
     }
     jump(blocks) {
 
@@ -66,7 +62,7 @@ class Player {
         
     }
     moveRight(blocks) {
-    
+
         this.playerPos.x += this.playerSpeed.x;
 
     }
@@ -74,24 +70,20 @@ class Player {
 
         this.playerPos.x -= this.playerSpeed.x
     }
-    //return 0 if the player is not on top of a block, return the Y value of the block that the player is standing on
+    //using a box casting to check if it colides with a block
     isGrounded(blocks) {
         let output = false;
-        //TODO this code needs to be re written 
+        const boxCastLength = 5;
+        const boxCast = {x:this.playerPos.x ,y:this.playerPos.y+this.playerSize.h, h:boxCastLength, w:this.playerSize.w};
         for (const block of blocks) {
-            //check for horizontal grounding
-            if (!(this.playerPos.x + this.playerSize.w <= block.pos.x  || this.playerPos.x >= block.pos.x + block.size.w )) {
-                
-                //check for vertical gorunding
-                if (this.playerPos.y + this.playerSize.h >= block.pos.y && this.playerPos.y + this.playerSize.h < block.pos.y + block.size.h) {
-
-
+            if (block.pos.x < boxCast.x + boxCast.w &&
+                block.pos.x + block.size.w > boxCast.x &&
+                block.pos.y < boxCast.y + boxCast.h &&
+                block.size.h + block.pos.y > boxCast.y) {
                     output = true;
                     break;
-                }
-            }
+            }            
         }
-        
         return output;
     }
     checkForCollision(blocks) {
@@ -113,18 +105,17 @@ class Player {
 
                 //get the smaller one
                 const min = Math.min(outUp,outDown,outLeft,outRight);
-
+                //we get the max in case there are multiple collisions to get the furthest away that we need
                 if(outUp === min){
-                    output = {x:0,y:this.playerPos.y-outUp};
+                    output.y = Math.max(output.y, this.playerPos.y-outUp);
                 }else if(outDown === min){
-                    output = {x:0,y:this.playerPos.y+outDown};
+                    output.y = Math.max(output.y,this.playerPos.y+outDown)
                 }else if(outLeft === min){
-                    output = {x:this.playerPos.x-outLeft ,y:0};
+                    output.x = Math.max(output.x,this.playerPos.x-outLeft);
                 }else if(outRight === min){
-                    output = {x:this.playerPos.x+outRight,y:0};
+                    output.x = Math.max(output.x,this.playerPos.x+outRight);
                 }
-                
-                //output = { ...this.pr eviousPos };
+            
             }
 
         }
