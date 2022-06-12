@@ -21,6 +21,7 @@ const platformGame = {
         
         console.log(this.level)
         this.player = new Player(this.ctx, this.canvasSize, 40, 40);
+        
         this.level = new Level(this.ctx, this.canvasSize, "1-1",this.player);
 
         /* 
@@ -107,6 +108,11 @@ const platformGame = {
 
             this.level.draw();
             this.player.draw();
+
+            if(this.level.isFinished()){
+                this.level = new Level(this.ctx, this.canvasSize, "1-2",this.player);   //TEMP TODO HARDCODED
+            }
+
 
         }, 1000 / this.fps)
     },

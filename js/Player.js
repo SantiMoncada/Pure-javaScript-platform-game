@@ -8,7 +8,7 @@ class Player {
         this.playerSpeed = { x: 0, y: 0 };
         this.jumping = false;
         this.jumpForce = 15;
-        this.pushingForce = 3;
+        this.pushingForce = 4;
         this.physics = { gravity: .3, drag: .7 };
         //this.playerImage
 
