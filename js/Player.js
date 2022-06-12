@@ -4,12 +4,12 @@ class Player {
         this.canvasSize = canvasSize;
         this.playerPos = { x: playerPosX, y: playerPosY };
         this.playerSize = { w: playerWidth, h: playerHeight };
-      
+
         this.playerSpeed = { x: 0, y: 0 };
         this.jumping = false;
         this.jumpForce = 15;
         this.pushingForce = 3;
-        this.physics = { gravity: .4 , drag : .8};
+        this.physics = { gravity: .3, drag: .7 };
         //this.playerImage
 
 
@@ -27,32 +27,31 @@ class Player {
 
     }
     updatePhysics(keyUp, blocks) {
-        
+
         this.playerPos.y += this.playerSpeed.y;
         this.playerSpeed.y += this.physics.gravity;
-        
         this.playerSpeed.x *= this.physics.drag;
         this.playerPos.x += this.playerSpeed.x;
-        
+
         const collision = this.checkForCollision(blocks);
 
-        if(collision.y && this.playerSpeed.y >= 0){
+        if (collision.y && this.playerSpeed.y >= 0) {
             this.playerPos.y = collision.y;
-            //this.playerSpeed.y *= -0.1; // bounce on land
-            this.playerSpeed.y = 0;
+            this.playerSpeed.y *= -0.2; // bounce on land
+            //this.playerSpeed.y = 0;
 
-        }else if(collision.y && this.playerSpeed.y < 0){
+        } else if (collision.y && this.playerSpeed.y < 0) {
             //bouncing on the ceilling
             this.playerPos.y = collision.y;
-            this.playerSpeed.y *= -1;            
+            this.playerSpeed.y *= -1;
         }
 
-        if(collision.x ){
+        if (collision.x) {
             //bounce on walls
             this.playerPos.x = collision.x;
-            this.playerSpeed.x *= -0.5;    
+            this.playerSpeed.x *= -1;
         }
-        
+
         //console.log("x:",this.playerSpeed.x.toFixed(3)," y:",this.playerSpeed.y.toFixed(3))
 
         /*to stop upwards speed on  a jump when the up arrow key is released, check if the key is pressed, 
@@ -63,23 +62,23 @@ class Player {
         if (!keyUp && this.jumping && this.playerSpeed.y < 0) {
             this.jumping = false;
             this.playerSpeed.y *= 0.2;
-        }else if(this.playerSpeed.y >= 0){
+        } else if (this.playerSpeed.y >= 0) {
             this.jumping = false
         }
 
     }
     jump(blocks) {
         //checking for jump before the funciton is gorunded is a good way to save on performance
-        if(!this.jumping && this.isGrounded(blocks)){
+        if (!this.jumping && this.isGrounded(blocks)) {
             this.playerPos.y -= 1;
             this.playerSpeed.y -= this.jumpForce;
             this.jumping = true;
         }
-        
+
     }
     moveRight() {
 
-       this.playerSpeed.x += this.pushingForce;
+        this.playerSpeed.x += this.pushingForce;
 
     }
     moveLeft() {
@@ -90,20 +89,20 @@ class Player {
     isGrounded(blocks) {
         const boxCastLength = 2;
         let output = false;
-        const boxCast = {x:this.playerPos.x ,y:this.playerPos.y+this.playerSize.h, h:boxCastLength, w:this.playerSize.w};
+        const boxCast = { x: this.playerPos.x, y: this.playerPos.y + this.playerSize.h, h: boxCastLength, w: this.playerSize.w };
         for (const block of blocks) {
             if (block.pos.x < boxCast.x + boxCast.w &&
                 block.pos.x + block.size.w > boxCast.x &&
                 block.pos.y < boxCast.y + boxCast.h &&
                 block.size.h + block.pos.y > boxCast.y) {
-                    output = true;
-                    break;
-            }            
+                output = true;
+                break;
+            }
         }
         return output;
     }
     checkForCollision(blocks) {
-        
+
         let output = { x: null, y: null };
         for (const block of blocks) {
             //check if the player has colided with a block
@@ -117,26 +116,26 @@ class Player {
                 //compare in all the four directions to get the shortest path outside the block
                 const outUp = - block.pos.y + this.playerPos.y + this.playerSize.h;
                 const outDown = block.pos.y + block.size.h - this.playerPos.y;
-                const outLeft = - block.pos.x + this.playerPos.x +this.playerSize.w;
+                const outLeft = - block.pos.x + this.playerPos.x + this.playerSize.w;
                 const outRight = block.pos.x + block.size.w - this.playerPos.x;
 
                 //get the smaller one
-                const min = Math.min(outUp,outDown,outLeft,outRight);
+                const min = Math.min(outUp, outDown, outLeft, outRight);
                 //we get the max in case there are multiple collisions to get the furthest away that we need
-                if(outUp === min){
-                    output.y = Math.max(output.y, this.playerPos.y-outUp);
-                }else if(outDown === min){
-                    output.y = Math.max(output.y,this.playerPos.y+outDown);
-                }else if(outLeft === min){
-                    output.x = Math.max(output.x,this.playerPos.x-outLeft);
-                }else if(outRight === min){
-                    output.x = Math.max(output.x,this.playerPos.x+outRight);
+                if (outUp === min) {
+                    output.y = Math.max(output.y, this.playerPos.y - outUp);
+                } else if (outDown === min) {
+                    output.y = Math.max(output.y, this.playerPos.y + outDown);
+                } else if (outLeft === min) {
+                    output.x = Math.max(output.x, this.playerPos.x - outLeft);
+                } else if (outRight === min) {
+                    output.x = Math.max(output.x, this.playerPos.x + outRight);
                 }
-            
+
             }
 
         }
-        console.log("Collision Checking:",output);
+        console.log("Collision Checking:", output);
         return output;
     }
 
