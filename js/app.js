@@ -79,10 +79,10 @@ const platformGame = {
             this.player.jump(this.blocks);
         }
         if (this.keysPressed.left) {
-            this.player.moveLeft(this.blocks);
+            this.player.moveLeft();
         }
         if (this.keysPressed.right) {
-            this.player.moveRight(this.blocks);
+            this.player.moveRight();
         }
     },
     drawAll() {

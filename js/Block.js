@@ -10,7 +10,7 @@ class Block {
 
     }
     draw() {
-        this.ctx.fillStyle = this.color; //HardCode
+        this.ctx.fillStyle = this.color;
         this.ctx.fillRect(this.pos.x, this.pos.y, this.size.w, this.size.h);
 
     }
