@@ -140,22 +140,4 @@ class Player {
         return output;
     }
 
-    // checkForCollision(blocks) {
-    //     // let output = { x: 0, y: 0 };
-    //     for (const block of blocks) {
-
-    //         if (this.playerPos.x + this.playerSize.w >= block.pos.x &&
-    //             this.playerPos.x <= block.pos.x + block.size.w &&
-    //             this.playerPos.y + this.playerSize.h >= block.pos.y &&
-    //             this.playerPos.y <= block.pos.y + block.size.h) {
-
-    //             return true
-
-
-    //         }
-
-    //         return false;
-    //     }
-    // }
-
 }
