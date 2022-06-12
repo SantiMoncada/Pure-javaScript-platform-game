@@ -11,6 +11,7 @@ const platformGame = {
     },
     keysPressed: { up: false, left: false, right: false },
     fps: 60,
+    //tileSize:
     init(canvasId) {
 
         this.ctx = document.querySelector(canvasId).getContext('2d');

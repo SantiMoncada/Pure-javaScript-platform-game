@@ -4,12 +4,12 @@ class Player {
         this.canvasSize = canvasSize;
         this.pos = {x:undefined, y:undefined};
         this.playerSize = { w: playerWidth, h: playerHeight };
-      
+
         this.playerSpeed = { x: 0, y: 0 };
         this.jumping = false;
         this.jumpForce = 15;
         this.pushingForce = 3;
-        this.physics = { gravity: .4 , drag : .8};
+        this.physics = { gravity: .3, drag: .7 };
         //this.playerImage
 
 
@@ -30,7 +30,6 @@ class Player {
         
         this.pos.y += this.playerSpeed.y;
         this.playerSpeed.y += this.physics.gravity;
-        
         this.playerSpeed.x *= this.physics.drag;
         this.pos.x += this.playerSpeed.x;
         
@@ -41,18 +40,18 @@ class Player {
             //this.playerSpeed.y *= -0.1; // bounce on land
             this.playerSpeed.y = 0;
 
-        }else if(collision.y && this.playerSpeed.y < 0){
+        } else if (collision.y && this.playerSpeed.y < 0) {
             //bouncing on the ceilling
             this.pos.y = collision.y;
             this.playerSpeed.y *= -1;            
         }
 
-        if(collision.x ){
+        if (collision.x) {
             //bounce on walls
             this.pos.x = collision.x;
             this.playerSpeed.x *= -0.5;    
         }
-        
+
         //console.log("x:",this.playerSpeed.x.toFixed(3)," y:",this.playerSpeed.y.toFixed(3))
 
         /*to stop upwards speed on  a jump when the up arrow key is released, check if the key is pressed, 
@@ -63,7 +62,7 @@ class Player {
         if (!keyUp && this.jumping && this.playerSpeed.y < 0) {
             this.jumping = false;
             this.playerSpeed.y *= 0.2;
-        }else if(this.playerSpeed.y >= 0){
+        } else if (this.playerSpeed.y >= 0) {
             this.jumping = false
         }
 
@@ -75,11 +74,11 @@ class Player {
             this.playerSpeed.y -= this.jumpForce;
             this.jumping = true;
         }
-        
+
     }
     moveRight() {
 
-       this.playerSpeed.x += this.pushingForce;
+        this.playerSpeed.x += this.pushingForce;
 
     }
     moveLeft() {
@@ -96,9 +95,9 @@ class Player {
                 block.pos.x + block.size.w > boxCast.x &&
                 block.pos.y < boxCast.y + boxCast.h &&
                 block.size.h + block.pos.y > boxCast.y) {
-                    output = true;
-                    break;
-            }            
+                output = true;
+                break;
+            }
         }
         return output;
     }
@@ -120,7 +119,7 @@ class Player {
                 const outRight = block.pos.x + block.size.w - this.pos.x;
 
                 //get the smaller one
-                const min = Math.min(outUp,outDown,outLeft,outRight);
+                const min = Math.min(outUp, outDown, outLeft, outRight);
                 //we get the max in case there are multiple collisions to get the furthest away that we need
                 if(outUp === min){
                     output.y = Math.max(output.y, this.pos.y-outUp);
@@ -131,7 +130,7 @@ class Player {
                 }else if(outRight === min){
                     output.x = Math.max(output.x,this.pos.x+outRight);
                 }
-            
+
             }
 
         }
