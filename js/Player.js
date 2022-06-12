@@ -1,8 +1,8 @@
 class Player {
-    constructor(ctx, canvasSize, playerPosX, playerPosY, playerWidth, playerHeight) {
+    constructor(ctx, canvasSize, playerWidth, playerHeight) {
         this.ctx = ctx;
         this.canvasSize = canvasSize;
-        this.playerPos = { x: playerPosX, y: playerPosY };
+        this.pos = {x:undefined, y:undefined};
         this.playerSize = { w: playerWidth, h: playerHeight };
       
         this.playerSpeed = { x: 0, y: 0 };
@@ -23,33 +23,33 @@ class Player {
     draw() {
 
         this.ctx.fillStyle = 'red';
-        this.ctx.fillRect(this.playerPos.x, this.playerPos.y, this.playerSize.w, this.playerSize.h);
+        this.ctx.fillRect(this.pos.x, this.pos.y, this.playerSize.w, this.playerSize.h);
 
     }
     updatePhysics(keyUp, blocks) {
         
-        this.playerPos.y += this.playerSpeed.y;
+        this.pos.y += this.playerSpeed.y;
         this.playerSpeed.y += this.physics.gravity;
         
         this.playerSpeed.x *= this.physics.drag;
-        this.playerPos.x += this.playerSpeed.x;
+        this.pos.x += this.playerSpeed.x;
         
         const collision = this.checkForCollision(blocks);
 
         if(collision.y && this.playerSpeed.y >= 0){
-            this.playerPos.y = collision.y;
+            this.pos.y = collision.y;
             //this.playerSpeed.y *= -0.1; // bounce on land
             this.playerSpeed.y = 0;
 
         }else if(collision.y && this.playerSpeed.y < 0){
             //bouncing on the ceilling
-            this.playerPos.y = collision.y;
+            this.pos.y = collision.y;
             this.playerSpeed.y *= -1;            
         }
 
         if(collision.x ){
             //bounce on walls
-            this.playerPos.x = collision.x;
+            this.pos.x = collision.x;
             this.playerSpeed.x *= -0.5;    
         }
         
@@ -71,7 +71,7 @@ class Player {
     jump(blocks) {
         //checking for jump before the funciton is gorunded is a good way to save on performance
         if(!this.jumping && this.isGrounded(blocks)){
-            this.playerPos.y -= 1;
+            this.pos.y -= 1;
             this.playerSpeed.y -= this.jumpForce;
             this.jumping = true;
         }
@@ -90,7 +90,7 @@ class Player {
     isGrounded(blocks) {
         const boxCastLength = 2;
         let output = false;
-        const boxCast = {x:this.playerPos.x ,y:this.playerPos.y+this.playerSize.h, h:boxCastLength, w:this.playerSize.w};
+        const boxCast = {x:this.pos.x ,y:this.pos.y+this.playerSize.h, h:boxCastLength, w:this.playerSize.w};
         for (const block of blocks) {
             if (block.pos.x < boxCast.x + boxCast.w &&
                 block.pos.x + block.size.w > boxCast.x &&
@@ -102,42 +102,70 @@ class Player {
         }
         return output;
     }
-    checkForCollision(blocks) {
-        
+    checkForCollision(blocks) {   
         let output = { x: null, y: null };
         for (const block of blocks) {
             //check if the player has colided with a block
-            if (block.pos.x < this.playerPos.x + this.playerSize.w &&
-                block.pos.x + block.size.w > this.playerPos.x &&
-                block.pos.y < this.playerPos.y + this.playerSize.h &&
-                block.size.h + block.pos.y > this.playerPos.y) {
+            if (block.pos.x < this.pos.x + this.playerSize.w &&
+                block.pos.x + block.size.w > this.pos.x &&
+                block.pos.y < this.pos.y + this.playerSize.h &&
+                block.size.h + block.pos.y > this.pos.y) {
 
                 //return the closes cords to the currrent cords from the previous cords with out cliping
                 //return 0 if the cords on x or y stay the same
                 //compare in all the four directions to get the shortest path outside the block
-                const outUp = - block.pos.y + this.playerPos.y + this.playerSize.h;
-                const outDown = block.pos.y + block.size.h - this.playerPos.y;
-                const outLeft = - block.pos.x + this.playerPos.x +this.playerSize.w;
-                const outRight = block.pos.x + block.size.w - this.playerPos.x;
+                const outUp = - block.pos.y + this.pos.y + this.playerSize.h;
+                const outDown = block.pos.y + block.size.h - this.pos.y;
+                const outLeft = - block.pos.x + this.pos.x +this.playerSize.w;
+                const outRight = block.pos.x + block.size.w - this.pos.x;
 
                 //get the smaller one
                 const min = Math.min(outUp,outDown,outLeft,outRight);
                 //we get the max in case there are multiple collisions to get the furthest away that we need
                 if(outUp === min){
-                    output.y = Math.max(output.y, this.playerPos.y-outUp);
+                    output.y = Math.max(output.y, this.pos.y-outUp);
                 }else if(outDown === min){
-                    output.y = Math.max(output.y,this.playerPos.y+outDown);
+                    output.y = Math.max(output.y,this.pos.y+outDown);
                 }else if(outLeft === min){
-                    output.x = Math.max(output.x,this.playerPos.x-outLeft);
+                    output.x = Math.max(output.x,this.pos.x-outLeft);
                 }else if(outRight === min){
-                    output.x = Math.max(output.x,this.playerPos.x+outRight);
+                    output.x = Math.max(output.x,this.pos.x+outRight);
                 }
             
             }
 
         }
-        console.log("Collision Checking:",output);
         return output;
+    }
+    isColliding(blocks){
+        let output = false;
+        for (const block of blocks) {
+            //check if the player has colided with a block
+            if (block.pos.x < this.pos.x + this.playerSize.w &&
+                block.pos.x + block.size.w > this.pos.x &&
+                block.pos.y < this.pos.y + this.playerSize.h &&
+                block.size.h + block.pos.y > this.pos.y) {
+                output = true;
+                break;
+            }
+
+        }
+        return output;
+    }
+    collidedWith(block){
+        let output = false;
+            if (block.pos.x < this.pos.x + this.playerSize.w &&
+                block.pos.x + block.size.w > this.pos.x &&
+                block.pos.y < this.pos.y + this.playerSize.h &&
+                block.size.h + block.pos.y > this.pos.y) {
+                output = true;
+        }
+        return output;
+    }
+    resetTo(newPos){
+        this.pos = {...newPos};
+        this.playerSpeed = { x: 0, y: 0 };
+        this.jumping = false;
     }
 
 }

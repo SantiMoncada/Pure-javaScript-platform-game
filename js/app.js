@@ -12,33 +12,44 @@ const platformGame = {
     keysPressed: { up: false, left: false, right: false },
     fps: 60,
     init(canvasId) {
+
         this.ctx = document.querySelector(canvasId).getContext('2d');
 
         this.setDimensions(canvasId);
 
-        //this.ctx.save()                       *see gravity, trying to find issue tried with this.
+        
+        console.log(this.level)
+        this.player = new Player(this.ctx, this.canvasSize, 40, 40);
+        this.level = new Level(this.ctx, this.canvasSize, "1-1",this.player);
 
-        this.player = new Player(this.ctx, this.canvasSize, 50, 460, 40, 40);
-
-        //TEMP Move to -> level
-        this.blocks = [];
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 1200, this.canvasSize.h - 250, 30, 200, "brown"));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 0, this.canvasSize.h - 50, this.canvasSize.w, 50, 'gray'));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 500, 700, 500, 30, "purple"));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 1200, 100, 30, 400, "yellow"));
-
-
+        /* 
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 0, this.canvasSize.h - 10, this.canvasSize.w, 10, 'gray'));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 0, 0, this.canvasSize.w, 10, 'gray'));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, this.canvasSize.w - 10, 0, 10, this.canvasSize.h, 'gray'));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 0, 0, 10, this.canvasSize.h, 'gray'));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 300, 700, 500, 10, "purple"));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 10, 200, 300, 10, "purple"));
+        //this.blocks.push(new Block(this.ctx, this.canvasSize, 700, 500, this.canvasSize.w - 710, 10, "blue"));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 900, 300, 300, 10, "green"));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 1010, 570, 580, 10, "pink"));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 1000, this.canvasSize.h - 260, 10, 250, "brown"));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 1010, 770, 370, 10, "green"));
+        this.blocks.push(new Block(this.ctx, this.canvasSize, 1200, 170, 10, 400, "yellow"));        
+        */
+        
         this.createEventListeners()
 
         this.drawAll();
     },
     setDimensions(canvasId) {
         this.canvasSize = {
-            w: window.innerWidth,
-            h: window.innerHeight,
+            //w: window.innerWidth,
+            //h: window.innerHeight,
+            w : 1600,
+            h : 900
         }
-        document.querySelector(canvasId).setAttribute('width', this.canvasSize.w-10)
-        document.querySelector(canvasId).setAttribute('height', this.canvasSize.h-10)
+        document.querySelector(canvasId).setAttribute('width', this.canvasSize.w)
+        document.querySelector(canvasId).setAttribute('height', this.canvasSize.h)
 
     },
     createEventListeners() {
@@ -76,7 +87,7 @@ const platformGame = {
     },
     updateInput() {
         if (this.keysPressed.up) {
-            this.player.jump(this.blocks);
+            this.player.jump(this.level.platforms);
         }
         if (this.keysPressed.left) {
             this.player.moveLeft();
@@ -88,11 +99,12 @@ const platformGame = {
     drawAll() {
         setInterval(() => {
             this.clearAll();
+            
             this.updateInput();
-            this.player.updatePhysics(this.keysPressed.up, this.blocks);
-            this.blocks.forEach(block => {
-                block.draw();
-            });
+            
+            this.player.updatePhysics(this.keysPressed.up, this.level.platforms);
+
+            this.level.draw();
             this.player.draw();
 
         }, 1000 / this.fps)
