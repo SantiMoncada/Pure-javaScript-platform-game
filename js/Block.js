@@ -1,8 +1,9 @@
 class Block {
-    constructor(ctx, canvasSize, posX, posY, width, height, color) {
+    constructor(ctx, canvasSize, tile, posX, posY, width, height, color) {
         this.ctx = ctx;
-        this.pos = { x: posX, y: posY };
-        this.size = { w: width, h: height };
+        this.tile = tile;
+        this.pos = { x: posX * this.tile, y: posY * this.tile };
+        this.size = { w: width * this.tile, h: height * this.tile };
         this.color = color;
     }
     draw() {

@@ -11,18 +11,17 @@ const platformGame = {
     },
     keysPressed: { up: false, left: false, right: false },
     fps: 60,
-    //tileSize:
+    tileSize: undefined,
     init(canvasId) {
 
         this.ctx = document.querySelector(canvasId).getContext('2d');
 
         this.setDimensions(canvasId);
 
-        
-        console.log(this.level)
-        this.player = new Player(this.ctx, this.canvasSize, 40, 40);
-        
-        this.level = new Level(this.ctx, this.canvasSize, "1-1",this.player);
+        console.log(this.tileSize)
+        this.player = new Player(this.ctx, this.canvasSize, this.tileSize, 20, 20);
+
+        this.level = new Level(this.ctx, this.canvasSize, this.tileSize, "1-2", this.player);
 
         /* 
         this.blocks.push(new Block(this.ctx, this.canvasSize, 0, this.canvasSize.h - 10, this.canvasSize.w, 10, 'gray'));
@@ -38,18 +37,20 @@ const platformGame = {
         this.blocks.push(new Block(this.ctx, this.canvasSize, 1010, 770, 370, 10, "green"));
         this.blocks.push(new Block(this.ctx, this.canvasSize, 1200, 170, 10, 400, "yellow"));        
         */
-        
+
         this.createEventListeners()
 
         this.drawAll();
     },
     setDimensions(canvasId) {
+
         this.canvasSize = {
-            //w: window.innerWidth,
-            //h: window.innerHeight,
-            w : 1600,
-            h : 900
+            w: window.innerWidth,
+            h: window.innerHeight,
+            // w: 1600,
+            // h: 900
         }
+        this.tileSize = this.canvasSize.w / 1000;
         document.querySelector(canvasId).setAttribute('width', this.canvasSize.w)
         document.querySelector(canvasId).setAttribute('height', this.canvasSize.h)
 
@@ -101,16 +102,16 @@ const platformGame = {
     drawAll() {
         setInterval(() => {
             this.clearAll();
-            
+
             this.updateInput();
-            
+
             this.player.updatePhysics(this.keysPressed.up, this.level.platforms);
 
             this.level.draw();
             this.player.draw();
 
-            if(this.level.isFinished()){
-                this.level = new Level(this.ctx, this.canvasSize, "1-2",this.player);   //TEMP TODO HARDCODED
+            if (this.level.isFinished()) {
+                this.level = new Level(this.ctx, this.canvasSize, "1-2", this.player);   //TEMP TODO HARDCODED
             }
 
 
