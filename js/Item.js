@@ -1,8 +1,9 @@
-class  Item{
-    constructor(ctx, canvasSize, posX, posY, width, height){
+class Item {
+    constructor(ctx, canvasSize, tile, posX, posY, width, height) {
         this.ctx = ctx;
-        this.pos = { x: posX, y: posY };
-        this.size = { w: width, h: height };
+        this.tile = tile
+        this.pos = { x: posX * this.tile, y: posY * this.tile };
+        this.size = { w: width * this.tile, h: height * this.tile };
 
     }
     draw() {
