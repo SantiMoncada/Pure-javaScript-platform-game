@@ -18,7 +18,6 @@ const platformGame = {
 
         this.setDimensions(canvasId);
 
-        console.log(this.tileSize)
         this.player = new Player(this.ctx, this.canvasSize, this.tileSize, 20, 20);
 
         this.level = new Level(this.ctx, this.canvasSize, this.tileSize, "1-1", this.player);
