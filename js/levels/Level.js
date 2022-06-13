@@ -16,13 +16,30 @@ class Level {
         switch (title) {
             case '1-1':
 
-                this.playerStartingPos = { x: 50, y: 800 };
+                this.playerStartingPos = { x: 25, y: 480 };
                 this.referenceToPlayer.pos = { ...this.playerStartingPos };
-                this.platforms.push(new Block(ctx, canvasSize, this.tile, 0, canvasSize.h - 50, canvasSize.w, 50, 'gray'));
-                this.platforms.push(new Block(ctx, canvasSize, this.tile, 500, 700, 500, 30, "purple"));
-                this.platforms.push(new Block(ctx, canvasSize, this.tile, 1200, 100, 30, 400, "yellow"));
+                const layout = layouts[0](this.ctx, this.canvasSize, this.tile);
+                this.platforms = [...layout.platforms];
+                this.deathBlocks = [...layout.deathBlocks];
 
-                this.deathBlocks.push(new Block(ctx, canvasSize, this.tile, 300, 500, 500, 30, "black"));
+                console.log(this.platforms)
+                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 0, 0, 5, 495, 'gray'));
+                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 995, 0, 5, 500, 'gray'));
+                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 0, 0, 1000, 5, 'gray'));
+                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 0, 495, 1000, 5, 'gray'));
+                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 155, 140, 5, 200, "purple"));
+                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 220, 210, 300, 5, "green"));
+                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 5, 420, 420, 5, "yellow"));
+                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 160, 475, 300, 20, 'gray'));
+                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 700, 5, 5, 400, "purple"));
+                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 780, 420, 215, 5, "yellow"));
+
+                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 925, 60, 70, 5, "blue"));
+                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 905, 180, 90, 5, "blue"));
+                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 885, 300, 110, 5, "blue"));
+
+                // this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, 460, 475, 50, 20, 'black'));
+
 
                 this.resetLevel(this.title);
                 break;
@@ -75,6 +92,7 @@ class Level {
                 this.items.push(new Item(this.ctx, this.canvasSize, this.tile, 200, 600, 20, 50));
                 this.items.push(new Item(this.ctx, this.canvasSize, this.tile, 300, 600, 20, 50));
                 this.items.push(new Item(this.ctx, this.canvasSize, this.tile, 400, 600, 20, 50));
+                this.items.push(new Item(this.ctx, this.canvasSize, this.tile, 925, 430, 10, 10));
 
                 this.doors = [];
                 this.doors.push(new Block(this.ctx, this.canvasSize, 1200, this.canvasSize.h - 400, 30, 450, "brown"));
@@ -83,7 +101,7 @@ class Level {
                 this.items = [];
                 this.items.push(new Item(this.ctx, this.canvasSize, this.tile, 150, 300, 10, 10));
                 this.items.push(new Item(this.ctx, this.canvasSize, this.tile, 700, 470, 10, 10));
-                this.items.push(new Item(this.ctx, this.canvasSize, this.tile, 150, 300, 10, 10));
+                this.items.push(new Item(this.ctx, this.canvasSize, this.tile, 450, 300, 10, 10));
                 this.items.push(new Item(this.ctx, this.canvasSize, this.tile, 10, 10, 10, 10));
                 // this.items.push(new Item(this.ctx, this.canvasSize,this.tile, 500, 100, 20, 50));
                 // this.items.push(new Item(this.ctx, this.canvasSize,this.tile, 100, 600, 20, 50));
@@ -99,7 +117,7 @@ class Level {
 
     isFinished() {
         //TEMP TODO HARDCODED
-        //return this.referenceToPlayer.pos.x > 1595;
+        return this.referenceToPlayer.pos.x > 935 * this.tile && this.referenceToPlayer.pos.y < 60 * this.tile;
         //TEMP TODO HARDCODED
     }
     draw() {

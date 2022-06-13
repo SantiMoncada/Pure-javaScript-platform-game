@@ -21,7 +21,7 @@ const platformGame = {
         console.log(this.tileSize)
         this.player = new Player(this.ctx, this.canvasSize, this.tileSize, 20, 20);
 
-        this.level = new Level(this.ctx, this.canvasSize, this.tileSize, "1-2", this.player);
+        this.level = new Level(this.ctx, this.canvasSize, this.tileSize, "1-1", this.player);
 
         /* 
         this.blocks.push(new Block(this.ctx, this.canvasSize, 0, this.canvasSize.h - 10, this.canvasSize.w, 10, 'gray'));
@@ -123,7 +123,7 @@ const platformGame = {
             this.player.draw();
 
             if (this.level.isFinished()) {
-                this.level = new Level(this.ctx, this.canvasSize, "1-2", this.player);   //TEMP TODO HARDCODED
+                this.level = new Level(this.ctx, this.canvasSize, this.tileSize, "1-2", this.player);   //TEMP TODO HARDCODED
             }
 
 
