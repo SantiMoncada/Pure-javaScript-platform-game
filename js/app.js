@@ -43,13 +43,25 @@ const platformGame = {
         this.drawAll();
     },
     setDimensions(canvasId) {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const aspectRatio = width / height;
+        if (aspectRatio > 2) {
+            this.canvasSize = {
+                w: height * 2,
+                h: height,
 
-        this.canvasSize = {
-            w: window.innerWidth,
-            h: window.innerHeight,
-            // w: 1600,
-            // h: 900
+            }
+        } else {
+            this.canvasSize = {
+                w: width,
+                h: width / 2,
+
+            }
+
         }
+
+
         this.tileSize = this.canvasSize.w / 1000;
         document.querySelector(canvasId).setAttribute('width', this.canvasSize.w)
         document.querySelector(canvasId).setAttribute('height', this.canvasSize.h)

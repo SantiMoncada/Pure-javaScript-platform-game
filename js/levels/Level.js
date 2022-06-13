@@ -30,23 +30,25 @@ class Level {
             case '1-2':
                 this.playerStartingPos = { x: 25, y: 200 };
                 this.referenceToPlayer.pos = { ...this.playerStartingPos };
-                this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 0, 0, 5, 500, 'gray'));
+                this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 0, 0, 5, 495, 'gray'));
                 this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 995, 0, 5, 500, 'gray'));
                 this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 0, 0, 1000, 5, 'gray'));
-                this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 0, 500, 1000, 5, 'gray'));
+                this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 0, 495, 1000, 5, 'gray'));
                 this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 150, 350, 250, 5, "purple"));
                 this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 5, 100, 150, 5, "purple"));
                 this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 200, 200, 150, 5, "blue"));
-                this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 450, 150, 150, 5, "orange"));
-                this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 705, 285, 290, 5, "pink"));
-                this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 705, 350, 5, 150, "brown"));
-                this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 710, 400, 185, 5, "green"));
-                // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 1200, 170, 10, 400, "yellow"));
+                this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 550, 150, 150, 5, "orange"));
+                this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 655, 285, 340, 5, "pink"));
+                this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 685, 350, 5, 145, "brown"));
+                this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 690, 400, 185, 5, "green"));
+                this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 700, 80, 5, 210, "yellow"));
 
-                // this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, 400, 330, 10, 20, "black"));
-                // this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, 690, 330, 10, 20, "black"));
-                // this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, 1000, 570, 10, 20, "black"));
-                // this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, 900, 310, 300, 10, "black"));
+                this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, 200, 190, 5, 10, "black"));
+                this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, 345, 190, 5, 10, "black"));
+                this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, 650, 285, 5, 10, "black"));
+                this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, 550, 155, 150, 5, "black"));
+                this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, 690, 405, 100, 5, "black"));
+                this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, 800, 485, 5, 10, "black"));
                 break;
 
         }
