@@ -22,7 +22,6 @@ class Level {
                 this.platforms = [...layout.platforms];
                 this.deathBlocks = [...layout.deathBlocks];
 
-                console.log(this.platforms)
                 // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 0, 0, 5, 495, 'gray'));
                 // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 995, 0, 5, 500, 'gray'));
                 // this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, 0, 0, 1000, 5, 'gray'));
