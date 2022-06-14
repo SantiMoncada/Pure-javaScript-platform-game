@@ -9,23 +9,17 @@ const platformGame = {
         w: undefined,
         h: undefined
     },
-    keysPressed: { up: false, left: false, right: false },
+    keysPressed: { up: false, left: false, right: false, previousUp: false },
     fps: 60,
     tileSize: undefined,
+    levelIndex: 0,
     init(canvasId) {
-
         this.ctx = document.querySelector(canvasId).getContext('2d');
-
         this.setDimensions(canvasId);
-
         this.player = new Player(this.ctx, this.canvasSize, this.tileSize, 20, 20);
-
-        this.level = new Level(this.ctx, this.canvasSize, this.tileSize, 0, this.player);
-
-
+        this.level = new Level(this.ctx, this.canvasSize, this.tileSize, this.levelIndex, this.player);
 
         this.createEventListeners()
-
         this.drawAll();
     },
     setDimensions(canvasId) {
@@ -36,22 +30,16 @@ const platformGame = {
             this.canvasSize = {
                 w: height * 2,
                 h: height,
-
             }
         } else {
             this.canvasSize = {
                 w: width,
                 h: width / 2,
-
             }
-
         }
-
-
         this.tileSize = this.canvasSize.w / 1000;
         document.querySelector(canvasId).setAttribute('width', this.canvasSize.w)
         document.querySelector(canvasId).setAttribute('height', this.canvasSize.h)
-
     },
     createEventListeners() {
         document.onkeydown = e => {
@@ -66,8 +54,6 @@ const platformGame = {
                 case 'ArrowUp':
                     this.keysPressed.up = true;
                     break;
-
-
             }
         }
         document.onkeyup = e => {
@@ -81,15 +67,15 @@ const platformGame = {
                     break;
                 case 'ArrowUp':
                     this.keysPressed.up = false;
-
                     break;
             }
         }
     },
     updateInput() {
-        if (this.keysPressed.up) {
+        if (this.keysPressed.up && !this.keysPressed.previousUp) {
             this.player.jump(this.level.platforms);
         }
+        this.keysPressed.previousUp = this.keysPressed.up;
         if (this.keysPressed.left) {
             this.player.moveLeft();
         }
@@ -100,19 +86,14 @@ const platformGame = {
     drawAll() {
         setInterval(() => {
             this.clearAll();
-
             this.updateInput();
-
             this.player.updatePhysics(this.keysPressed.up, this.level.platforms);
-
             this.level.draw();
             this.player.draw();
-
             if (this.level.isFinished()) {
-                this.level = new Level(this.ctx, this.canvasSize, this.tileSize, "1-2", this.player);   //TEMP TODO HARDCODED
+                this.levelIndex++;
+                this.level = new Level(this.ctx, this.canvasSize, this.tileSize, this.levelIndex, this.player);   //TEMP TODO HARDCODED
             }
-
-
         }, 1000 / this.fps)
     },
     clearAll() {

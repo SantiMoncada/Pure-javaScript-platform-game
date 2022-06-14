@@ -52,35 +52,14 @@ class Level {
 
         this.currentItems = [...this.items];
         this.currentDoors = [...this.doors];
-        // switch (title) {
-        //     case '1-1':
-        //         this.items = [];
-
-        //         this.items.push(new Item(this.ctx, this.canvasSize, this.tile, 925, 430, 10, 10));
-        //         this.items.push(new Item(this.ctx, this.canvasSize, this.tile, 25, 250, 10, 10));
-
-        //         this.doors = [];
-        //         this.doors.push(new Block(this.ctx, this.canvasSize, this.tile, 925, 5, 70, 55, "brown"));
-        //         break;
-        //     case '1-2':
-        //         this.items = [];
-        //         150, 300, 10, 10));
-        //         700, 470, 10, 10));
-        //         450, 300, 10, 10));
-        //         10, 10, 10, 10));
-
-        //         this.doors = [];
-        //         this.doors.push(new Block(this.ctx, this.canvasSize, this.tile, 925, 5, 70, 55, "brown"));
-
-        //         break;
-        // }
 
     }
 
     isFinished() {
         //TEMP TODO HARDCODED
-        if (this.currentDoors.length === 0) {
-            return this.referenceToPlayer.pos.x > 935 * this.tile && this.referenceToPlayer.pos.y < 60 * this.tile;
+        if (this.referenceToPlayer.pos.x > 935 * this.tile && this.referenceToPlayer.pos.y < 60 * this.tile) {
+            //return this.referenceToPlayer.pos.x > 935 * this.tile && this.referenceToPlayer.pos.y < 60 * this.tile;
+            return true
 
         } else {
             return false
@@ -92,6 +71,8 @@ class Level {
         //TEMP TODO HARDCODED
         if (this.currentItems.length === 0) {
             this.currentDoors[0].color = 'green';
+        } else {
+            this.currentDoors[0].color = 'brown';
         }
 
 

@@ -32,6 +32,7 @@ const levels = [
             { x: 925, y: 5, w: 70, h: 55, color: 'brown' },
         ]
     },
+
     {
         title: "1-2",
         playerStartingPos: { x: 25, y: 480 },
@@ -79,6 +80,62 @@ const levels = [
         doors: [
             { x: 925, y: 5, w: 70, h: 55, color: 'brown' },
         ]
+
+    },
+
+    {
+        title: "1-3",
+        playerStartingPos: { x: 25, y: 450 },
+        platforms: [
+            { x: 0, y: 480, w: 200, h: 20, color: 'gray' },
+            { x: 0, y: 0, w: 100, h: 400, color: 'gray' },
+            { x: 200, y: 200, w: 200, h: 500, color: 'gray' },
+            { x: 900, y: 60, w: 200, h: 500, color: 'gray' },
+            { x: 420, y: 0, w: 160, h: 150, color: 'gray' },
+            { x: 600, y: 200, w: 150, h: 300, color: 'gray' },
+            { x: 600, y: 200, w: 150, h: 300, color: 'gray' },
+            { x: 600, y: 200, w: 150, h: 300, color: 'gray' },
+
+
+
+        ],
+        deathBlocks: [
+            //{ x: 300, y: 400, w: 100, h: 30, color: 'black' },
+        ],
+        items: [
+            { x: 500, y: 250, w: 10, h: 10 },
+            { x: 150, y: 400, w: 10, h: 10 },
+
+        ],
+        doors: [
+            { x: 930, y: 5, w: 70, h: 55, color: 'brown' },
+        ]
+    },
+
+    {
+        title: "1-4",
+        playerStartingPos: { x: 25, y: 450 },
+        platforms: [
+            { x: 0, y: 480, w: 100, h: 20, color: 'gray' },
+            { x: 200, y: 0, w: 20, h: 400, color: 'purple' },
+            { x: 500, y: 0, w: 20, h: 400, color: 'purple' },
+
+
+
+
+        ],
+        deathBlocks: [
+            //{ x: 300, y: 400, w: 100, h: 30, color: 'black' },
+        ],
+        items: [
+            { x: 400, y: 250, w: 10, h: 10 },
+            { x: 25, y: 400, w: 10, h: 10 },
+
+        ],
+        doors: [
+            { x: 930, y: 5, w: 70, h: 55, color: 'brown' },
+        ]
+
 
     }
 
