@@ -94,7 +94,7 @@ class Level {
                 this.items.push(new Item(this.ctx, this.canvasSize, this.tile, 925, 430, 10, 10));
 
                 this.doors = [];
-                this.doors.push(new Block(this.ctx, this.canvasSize, 1200, this.canvasSize.h - 400, 30, 450, "brown"));
+                this.doors.push(new Block(this.ctx, this.canvasSize, this.tile, 925, 5, 70, 55, "brown"));
                 break;
             case '1-2':
                 this.items = [];

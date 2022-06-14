@@ -71,8 +71,8 @@ class Player {
     jump(blocks) {
         //checking for jump before the funciton is gorunded is a good way to save on performance
         if (!this.jumping && this.isGrounded(blocks)) {
-            
-            this.playerSpeed.y -= this.jumpForce;
+
+            this.playerSpeed.y = -this.jumpForce;
             this.jumping = true;
         }
 
