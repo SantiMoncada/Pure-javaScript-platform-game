@@ -20,22 +20,9 @@ const platformGame = {
 
         this.player = new Player(this.ctx, this.canvasSize, this.tileSize, 20, 20);
 
-        this.level = new Level(this.ctx, this.canvasSize, this.tileSize, "1-1", this.player);
+        this.level = new Level(this.ctx, this.canvasSize, this.tileSize, 0, this.player);
 
-        /* 
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 0, this.canvasSize.h - 10, this.canvasSize.w, 10, 'gray'));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 0, 0, this.canvasSize.w, 10, 'gray'));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, this.canvasSize.w - 10, 0, 10, this.canvasSize.h, 'gray'));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 0, 0, 10, this.canvasSize.h, 'gray'));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 300, 700, 500, 10, "purple"));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 10, 200, 300, 10, "purple"));
-        //this.blocks.push(new Block(this.ctx, this.canvasSize, 700, 500, this.canvasSize.w - 710, 10, "blue"));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 900, 300, 300, 10, "green"));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 1010, 570, 580, 10, "pink"));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 1000, this.canvasSize.h - 260, 10, 250, "brown"));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 1010, 770, 370, 10, "green"));
-        this.blocks.push(new Block(this.ctx, this.canvasSize, 1200, 170, 10, 400, "yellow"));        
-        */
+
 
         this.createEventListeners()
 
