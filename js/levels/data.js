@@ -1,37 +1,57 @@
 const levels = [
     {
-        title: "1-1",
-        playerStartingPos: { x: 25, y: 450 },
+        title: "doubleJump",
+        playerStartingPos: { x: 6, y: 10 },
+        foreGround:"./assets/doubleJump.png",
         platforms: [
-            { x: 0, y: 480, w: 200, h: 32, color: 'gray' },
-            { x: 0, y: 0, w: 100, h: 400, color: 'gray' },
-            { x: 100, y: 0, w: 320, h: 20, color: 'gray' },
-            { x: 200, y: 200, w: 200, h: 312, color: 'gray' },
-            { x: 900, y: 60, w: 200, h: 500, color: 'gray' },
-            { x: 420, y: 0, w: 160, h: 150, color: 'gray' },
-            { x: 580, y: 0, w: 350, h: 20, color: 'gray' },
-            { x: 600, y: 200, w: 150, h: 312, color: 'gray' },
-            // { x: 600, y: 200, w: 150, h: 300, color: 'gray' },
-            // { x: 600, y: 200, w: 150, h: 300, color: 'gray' },
-
-
-
+            { x: 0, y: 1, w: 5, h: 6, color: 'gray' },
+            { x: 0, y: 12, w: 8, h: 3, color: 'gray' },
+            { x: 0, y: 0, w: 30, h: 1, color: 'gray' },
+            { x: 13, y: 0, w: 5, h: 4, color: 'gray' },
+            { x: 8, y: 6, w: 5, h: 9, color: 'gray' },
+            { x: 18, y: 6, w: 4, h: 9, color: 'gray' },
+            { x: 27, y: 3, w: 3, h: 12, color: 'gray' },
         ],
         deathBlocks: [
             //{ x: 300, y: 400, w: 100, h: 30, color: 'black' },
         ],
         items: [
-            { x: 500, y: 250, w: 10, h: 10, type: "key" },
-            { x: 150, y: 400, w: 10, h: 10, type: "key" },
-            { x: 100, y: 450, w: 10, h: 10, type: "wallJump" },
+            { x: 15, y: 8, w: 0.5, h: 0.5, type: "key" },
+            { x: 6, y: 6, w: 0.5, h: 0.5, type: "key" },
+            { x: 4, y: 10, w: 0.5, h: 0.5, type: "wallJump" },
 
         ],
         doors: [
-            { x: 930, y: 0, w: 94, h: 60, color: 'brown', keyNumber: 2 },
+            { x: 29, y: 0, w: 1, h: 3, color: 'brown', keyNumber: 2 },
         ]
     },
-
     {
+        title: "doubleJumpIslands",
+        playerStartingPos: { x: 1, y: 10 },
+        foreGround: "./assets/DoubleJumpIslands.png",
+        platforms: [
+            { x: 0, y: 12, w: 8, h: 3, color: 'gray' },
+            { x: 0, y: 2, w: 6, h: 0.5, color: 'gray' },
+            { x: 12, y: 6, w: 6, h: 0.5, color: 'gray' },
+            { x: 14, y: 12, w: 3, h: 0.5, color: 'gray' },
+            { x: 24, y: 13, w: 6, h: 2, color: 'gray' },
+            { x: 26, y: 7, w: 4, h: 0.5, color: 'gray' },
+            { x: 26, y: 2, w: 4, h: 0.5, color: 'gray' },
+        ],
+        deathBlocks: [
+            //{ x: 300, y: 400, w: 100, h: 30, color: 'black' },
+        ],
+        items: [
+            { x: 1, y: 1, w: 0.5, h: 0.5, type: "key" },
+            { x: 15.25, y: 10, w: 0.5, h: 0.5, type: "key" },
+            { x: 27, y: 11, w: 0.5, h: 0.5, type: "doubleJump" },
+
+        ],
+        doors: [
+            { x: 29, y: 0, w: 1, h: 2, color: 'brown', keyNumber: 2 },
+        ]
+        },
+        {
         title: "1-2",
         playerStartingPos: { x: 25, y: 480 },
         platforms: [

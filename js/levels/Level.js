@@ -12,12 +12,15 @@ class Level {
         this.currentItems = [];
         this.tile = tile;
         this.keysCollected = 0;
+        this.background = "./assets/backGround.png";
+        this.backgroundImageInstance = undefined;
+        this.foreGroundImageInstance = undefined;
         this.init(ctx, canvasSize, levelIndex);
     }
     init(ctx, canvasSize, levelIndex) {
         const levelLayout = levels[levelIndex];
 
-        this.playerStartingPos = levelLayout.playerStartingPos;
+        this.playerStartingPos = { x: levelLayout.playerStartingPos.x * 34.1333, y: levelLayout.playerStartingPos.y * 34.1333};
 
         levelLayout.platforms.forEach(block => {
             this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, block.x, block.y, block.w, block.h, block.color));
@@ -31,6 +34,11 @@ class Level {
         levelLayout.doors.forEach(block => {
             this.door = (new Door(this.ctx, this.canvasSize, this.tile, block.x, block.y, block.w, block.h, block.color, block.keyNumber));
         });
+        
+        this.backgroundImageInstance = new Image();
+        this.backgroundImageInstance.src = this.background;
+        this.foreGroundImageInstance = new Image();
+        this.foreGroundImageInstance.src = levelLayout.foreGround;
 
         this.referenceToPlayer.resetTo(this.playerStartingPos);
 
@@ -41,7 +49,7 @@ class Level {
     }
     isPlayerAlive(player) {
         let output = true;
-        if (player.pos.y > 500 * this.tile ||
+        if (player.pos.y > 15 * this.tile ||
             player.isColliding(this.deathBlocks)) {
             output = false;
         }
@@ -56,7 +64,7 @@ class Level {
 
     isFinished() {
         //TEMP TODO HARDCODED
-        if (this.door.isOpen && this.referenceToPlayer.pos.x > 935 * this.tile && this.referenceToPlayer.pos.y < 60 * this.tile) {
+        if (this.door.isOpen && this.referenceToPlayer.pos.x > 29 * this.tile && this.referenceToPlayer.pos.y < 3 * this.tile) {
             //return this.referenceToPlayer.pos.x > 935 * this.tile && this.referenceToPlayer.pos.y < 60 * this.tile;
             return true
 
@@ -80,13 +88,14 @@ class Level {
             this.referenceToPlayer.resetTo(this.playerStartingPos);
             this.resetLevel();
         }
-
-        this.platforms.forEach(block => {
-            block.draw();
-        });
+        this.ctx.drawImage(this.backgroundImageInstance, 0, 0, 30 * this.tile, 15 * this.tile);
+        // this.platforms.forEach(block => {
+        //     block.draw();
+        // });
         this.deathBlocks.forEach(block => {
             block.draw();
         });
+        
         this.door.draw();
 
         let i;
@@ -110,6 +119,7 @@ class Level {
         }
         this.currentItems.splice(i, 1);
 
+        this.ctx.drawImage(this.foreGroundImageInstance,0,0,30*this.tile,15*this.tile);
         this.currentItems.forEach((item) => {
             item.draw();
         });

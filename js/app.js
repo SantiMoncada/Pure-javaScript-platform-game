@@ -12,13 +12,13 @@ const platformGame = {
     keysPressed: { up: false, left: false, right: false, previousUp: false },
     fps: 60,
     tileSize: undefined,
+    bigTileSize: undefined,
     levelIndex: 0,
     init(canvasId) {
         this.ctx = document.querySelector(canvasId).getContext('2d');
         this.setDimensions(canvasId);
         this.player = new Player(this.ctx, this.canvasSize, this.tileSize, 20, 20);
-        this.level = new Level(this.ctx, this.canvasSize, this.tileSize, this.levelIndex, this.player);
-
+        this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player);
         this.createEventListeners()
         this.drawAll();
     },
@@ -38,6 +38,7 @@ const platformGame = {
             }
         }
         this.tileSize = this.canvasSize.w / 1024;
+        this.bigTileSize = this.canvasSize.w / 30;
         document.querySelector(canvasId).setAttribute('width', this.canvasSize.w)
         document.querySelector(canvasId).setAttribute('height', this.canvasSize.h)
     },
@@ -92,7 +93,7 @@ const platformGame = {
             this.player.draw();
             if (this.level.isFinished()) {
                 this.levelIndex++;
-                this.level = new Level(this.ctx, this.canvasSize, this.tileSize, this.levelIndex, this.player);   //TEMP TODO HARDCODED
+                this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player);   //TEMP TODO HARDCODED
             }
         }, 1000 / this.fps)
     },
