@@ -1,7 +1,38 @@
 const levels = [
-
     {
         title: "1-1",
+        playerStartingPos: { x: 25, y: 450 },
+        platforms: [
+            { x: 0, y: 480, w: 200, h: 32, color: 'gray' },
+            { x: 0, y: 0, w: 100, h: 400, color: 'gray' },
+            { x: 100, y: 0, w: 320, h: 20, color: 'gray' },
+            { x: 200, y: 200, w: 200, h: 312, color: 'gray' },
+            { x: 900, y: 60, w: 200, h: 500, color: 'gray' },
+            { x: 420, y: 0, w: 160, h: 150, color: 'gray' },
+            { x: 580, y: 0, w: 350, h: 20, color: 'gray' },
+            { x: 600, y: 200, w: 150, h: 312, color: 'gray' },
+            // { x: 600, y: 200, w: 150, h: 300, color: 'gray' },
+            // { x: 600, y: 200, w: 150, h: 300, color: 'gray' },
+
+
+
+        ],
+        deathBlocks: [
+            //{ x: 300, y: 400, w: 100, h: 30, color: 'black' },
+        ],
+        items: [
+            { x: 500, y: 250, w: 10, h: 10, type: "key" },
+            { x: 150, y: 400, w: 10, h: 10, type: "key" },
+            { x: 100, y: 450, w: 10, h: 10, type: "wallJump" },
+
+        ],
+        doors: [
+            { x: 930, y: 0, w: 94, h: 60, color: 'brown', keyNumber: 2 },
+        ]
+    },
+
+    {
+        title: "1-2",
         playerStartingPos: { x: 25, y: 480 },
         platforms: [
             { x: 0, y: 0, w: 5, h: 495, color: 'gray' },
@@ -24,17 +55,45 @@ const levels = [
             { x: 460, y: 475, w: 50, h: 20, color: 'black' },
         ],
         items: [
-            { x: 925, y: 430, w: 10, h: 10 },
-            { x: 25, y: 250, w: 10, h: 10 },
+            { x: 925, y: 430, w: 10, h: 10, type: "key" },
+            { x: 25, y: 250, w: 10, h: 10, type: "key" },
+            { x: 70, y: 250, w: 10, h: 10, type: "doubleJump" }
 
         ],
         doors: [
-            { x: 925, y: 5, w: 70, h: 55, color: 'brown' },
+            { x: 925, y: 5, w: 70, h: 55, color: 'brown', keyNumber: 2 },
         ]
+    },
+    {
+        title: "1-3",
+        playerStartingPos: { x: 25, y: 450 },
+        platforms: [
+            { x: 0, y: 480, w: 100, h: 20, color: 'gray' },
+            { x: 200, y: 70, w: 20, h: 330, color: 'purple' },
+            { x: 500, y: 70, w: 20, h: 330, color: 'purple' },
+
+
+
+
+        ],
+        deathBlocks: [
+            //{ x: 300, y: 400, w: 100, h: 30, color: 'black' },
+        ],
+        items: [
+            { x: 400, y: 250, w: 10, h: 10, type: "key" },
+            { x: 25, y: 400, w: 10, h: 10, type: "wallJump" },
+            { x: 600, y: 200, w: 10, h: 10, type: "doubleJump" }
+
+        ],
+        doors: [
+            { x: 930, y: 5, w: 70, h: 55, color: 'brown', keyNumber: 1 }
+        ]
+
+
     },
 
     {
-        title: "1-2",
+        title: "1-4",
         playerStartingPos: { x: 25, y: 480 },
         platforms: [
             { x: 0, y: 0, w: 5, h: 495, color: 'gray' },
@@ -69,75 +128,23 @@ const levels = [
 
         ],
         items: [
-            { x: 150, y: 300, w: 10, h: 10 },
-            { x: 700, y: 470, w: 10, h: 10 },
-            { x: 450, y: 300, w: 10, h: 10 },
-            { x: 10, y: 10, w: 10, h: 10 },
+            { x: 150, y: 300, w: 10, h: 10, type: "key" },
+            { x: 700, y: 470, w: 10, h: 10, type: "key" },
+            { x: 450, y: 300, w: 10, h: 10, type: "key" },
+            { x: 10, y: 10, w: 10, h: 10, type: "key" },
 
 
 
         ],
         doors: [
-            { x: 925, y: 5, w: 70, h: 55, color: 'brown' },
+            { x: 925, y: 5, w: 70, h: 55, color: 'brown', keyNumber: 2 },
         ]
-
-    },
-
-    {
-        title: "1-3",
-        playerStartingPos: { x: 25, y: 450 },
-        platforms: [
-            { x: 0, y: 480, w: 200, h: 20, color: 'gray' },
-            { x: 0, y: 0, w: 100, h: 400, color: 'gray' },
-            { x: 200, y: 200, w: 200, h: 500, color: 'gray' },
-            { x: 900, y: 60, w: 200, h: 500, color: 'gray' },
-            { x: 420, y: 0, w: 160, h: 150, color: 'gray' },
-            { x: 600, y: 200, w: 150, h: 300, color: 'gray' },
-            { x: 600, y: 200, w: 150, h: 300, color: 'gray' },
-            { x: 600, y: 200, w: 150, h: 300, color: 'gray' },
-
-
-
-        ],
-        deathBlocks: [
-            //{ x: 300, y: 400, w: 100, h: 30, color: 'black' },
-        ],
-        items: [
-            { x: 500, y: 250, w: 10, h: 10 },
-            { x: 150, y: 400, w: 10, h: 10 },
-
-        ],
-        doors: [
-            { x: 930, y: 5, w: 70, h: 55, color: 'brown' },
-        ]
-    },
-
-    {
-        title: "1-4",
-        playerStartingPos: { x: 25, y: 450 },
-        platforms: [
-            { x: 0, y: 480, w: 100, h: 20, color: 'gray' },
-            { x: 200, y: 0, w: 20, h: 400, color: 'purple' },
-            { x: 500, y: 0, w: 20, h: 400, color: 'purple' },
-
-
-
-
-        ],
-        deathBlocks: [
-            //{ x: 300, y: 400, w: 100, h: 30, color: 'black' },
-        ],
-        items: [
-            { x: 400, y: 250, w: 10, h: 10 },
-            { x: 25, y: 400, w: 10, h: 10 },
-
-        ],
-        doors: [
-            { x: 930, y: 5, w: 70, h: 55, color: 'brown' },
-        ]
-
 
     }
+
+
+
+
 
 
 ]

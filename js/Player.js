@@ -58,7 +58,6 @@ class Player {
         }
         //power ups physics
         if (this.doubleJump && this.doubleJumping) {
-            console.log("checking double jump");
             if (this.isGrounded(blocks)) {
                 this.doubleJumping = false;
             }
@@ -161,7 +160,26 @@ class Player {
         this.pos = { x: newPos.x * this.tile, y: newPos.y * this.tile };
         this.playerSpeed = { x: 0, y: 0 };
         this.jumping = false;
+        this.removePowerUps()
     }
+    addPowerUp(type) {
+        this.removePowerUps()
+        switch (type) {
+            case "wallJump":
+                this.wallJump = true;
+                break;
+            case "doubleJump":
+                this.doubleJump = true;
+                break;
+        }
+
+    }
+    removePowerUps() {
+        this.doubleJumping = false;
+        this.wallJump = false;
+        this.doubleJump = false;
+    }
+
 }
 
 

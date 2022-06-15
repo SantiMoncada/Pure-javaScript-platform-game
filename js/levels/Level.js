@@ -8,10 +8,10 @@ class Level {
         this.platforms = [];
         this.deathBlocks = [];
         this.items = [];
-        this.doors = [];
+        this.door = undefined;
         this.currentItems = [];
-        this.currentDoors = [];
         this.tile = tile;
+        this.keysCollected = 0;
         this.init(ctx, canvasSize, levelIndex);
     }
     init(ctx, canvasSize, levelIndex) {
@@ -26,16 +26,15 @@ class Level {
             this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, block.x, block.y, block.w, block.h, block.color));
         });
         levelLayout.items.forEach(item => {
-            this.items.push(new Item(this.ctx, this.canvasSize, this.tile, item.x, item.y, item.w, item.h));
+            this.items.push(new Item(this.ctx, this.canvasSize, this.tile, item.x, item.y, item.w, item.h, item.type)); // add the parameter type
         });
         levelLayout.doors.forEach(block => {
-            this.doors.push(new Block(this.ctx, this.canvasSize, this.tile, block.x, block.y, block.w, block.h, block.color));
+            this.door = (new Door(this.ctx, this.canvasSize, this.tile, block.x, block.y, block.w, block.h, block.color, block.keyNumber));
         });
 
         this.referenceToPlayer.resetTo(this.playerStartingPos);
 
         this.currentItems = [...this.items];
-        this.currentDoors = [...this.doors];
 
 
 
@@ -49,15 +48,15 @@ class Level {
         return output;
     }
     resetLevel() {
-
+        this.keysCollected = 0;
+        //reset player powerUps TODO
         this.currentItems = [...this.items];
-        this.currentDoors = [...this.doors];
 
     }
 
     isFinished() {
         //TEMP TODO HARDCODED
-        if (this.referenceToPlayer.pos.x > 935 * this.tile && this.referenceToPlayer.pos.y < 60 * this.tile) {
+        if (this.door.isOpen && this.referenceToPlayer.pos.x > 935 * this.tile && this.referenceToPlayer.pos.y < 60 * this.tile) {
             //return this.referenceToPlayer.pos.x > 935 * this.tile && this.referenceToPlayer.pos.y < 60 * this.tile;
             return true
 
@@ -68,11 +67,10 @@ class Level {
     }
     draw() {
 
-        //TEMP TODO HARDCODED
-        if (this.currentItems.length === 0) {
-            this.currentDoors[0].color = 'green';
+        if (this.door.keyNumber <= this.keysCollected) {
+            this.door.isOpen = true;
         } else {
-            this.currentDoors[0].color = 'brown';
+            this.door.isOpen = false;
         }
 
 
@@ -89,17 +87,31 @@ class Level {
         this.deathBlocks.forEach(block => {
             block.draw();
         });
-        this.currentDoors.forEach(block => {
-            block.draw();
-        });
-        this.currentItems.forEach((item, index, arr) => {
-            if (this.referenceToPlayer.collidedWith(item)) {
-                arr.splice(index, 1);
-                item.draw();
-            } else {
-                item.draw();
-            }
+        this.door.draw();
 
+        let i;
+        for (i = 0; i < this.currentItems.length; i++) {
+            const item = this.currentItems[i];
+
+            if (this.referenceToPlayer.collidedWith(item)) {
+                switch (item.type) {
+                    case "key":
+                        this.keysCollected++;
+                        break;
+                    case "doubleJump":
+                        this.referenceToPlayer.addPowerUp(item.type)
+                        break;
+                    case "wallJump":
+                        this.referenceToPlayer.addPowerUp(item.type)
+                        break;
+                }
+                break;
+            }
+        }
+        this.currentItems.splice(i, 1);
+
+        this.currentItems.forEach((item) => {
+            item.draw();
         });
     }
 
