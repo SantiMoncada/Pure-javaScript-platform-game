@@ -23,10 +23,10 @@ class Level {
         this.playerStartingPos = { x: levelLayout.playerStartingPos.x * 34.1333, y: levelLayout.playerStartingPos.y * 34.1333};
 
         levelLayout.platforms.forEach(block => {
-            this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, block.x, block.y, block.w, block.h, block.color));
+            this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, block.x, block.y, block.w, block.h));
         });
         levelLayout.deathBlocks.forEach(block => {
-            this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, block.x, block.y, block.w, block.h, block.color));
+            this.deathBlocks.push(new Block(this.ctx, this.canvasSize, this.tile, block.x, block.y, block.w, block.h));
         });
         levelLayout.items.forEach(item => {
             this.items.push(new Item(this.ctx, this.canvasSize, this.tile, item.x, item.y, item.w, item.h, item.type)); // add the parameter type
