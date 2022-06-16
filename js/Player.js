@@ -13,16 +13,15 @@ class Player {
         this.wallJump = false;
         this.doubleJump = false;
         this.doubleJumping = false;
-        //this.playerImage
+        this.playerImage = "./assets/Crate.png";
         this.init();
     }
     init() {
-        // this.imageInstance = new Image()                                 For images
-        // this.imageInstance.src = this.playerImg
+        this.imageInstance = new Image();
+        this.imageInstance.src = this.playerImage;
     }
     draw() {
-        this.ctx.fillStyle = 'red';
-        this.ctx.fillRect(this.pos.x, this.pos.y, this.playerSize.w, this.playerSize.h);
+        this.ctx.drawImage(this.imageInstance, this.pos.x, this.pos.y, this.playerSize.w, this.playerSize.h);
     }
     updatePhysics(keyUp, blocks) {
         this.pos.y += this.playerSpeed.y;

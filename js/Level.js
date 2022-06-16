@@ -75,10 +75,13 @@ class Level {
     }
     draw() {
 
+
+        console.log("x:", parseInt(this.referenceToPlayer.pos.x / this.tile), " y:", parseInt(this.referenceToPlayer.pos.y / this.tile))//level building
+
         if (this.door.keyNumber <= this.keysCollected) {
-            this.door.isOpen = true;
+            this.door.open();
         } else {
-            this.door.isOpen = false;
+            this.door.close();
         }
 
 
@@ -88,15 +91,14 @@ class Level {
             this.referenceToPlayer.resetTo(this.playerStartingPos);
             this.resetLevel();
         }
+        
         this.ctx.drawImage(this.backgroundImageInstance, 0, 0, 30 * this.tile, 15 * this.tile);
-        // this.platforms.forEach(block => {
-        //     block.draw();
-        // });
+
         this.deathBlocks.forEach(block => {
             block.draw();
         });
         
-        this.door.draw();
+        
 
         let i;
         for (i = 0; i < this.currentItems.length; i++) {
@@ -123,6 +125,14 @@ class Level {
         this.currentItems.forEach((item) => {
             item.draw();
         });
+
+        //debug HARDCODED TODO
+         this.platforms.forEach(block => {
+             block.draw();
+         });
+
+
+        this.door.draw();
     }
 
 }

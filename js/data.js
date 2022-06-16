@@ -1,8 +1,126 @@
 const levels = [
     {
+        title: "start",
+        playerStartingPos: { x: 2, y: 10 },
+        foreGround: "./assets/levels/start.png",
+        platforms: [
+            { x: 0, y:13, w:30, h: 2 },
+            { x: 18, y: 11, w: 12, h: 2 },
+            { x: 21, y: 9, w: 9, h: 2 },
+            { x: 24, y: 6, w: 9, h: 3 },
+            { x: 27, y: 3, w: 9, h: 3 },
+
+
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2, h: 40 },
+            { x: -2, y: -10, w: 2, h: 40 },
+            
+        ],
+        deathBlocks: [
+        ],
+        items: [
+        ],
+        doors: [
+            { x: 29, y: 0, w: 1, h: 3, color: 'brown', keyNumber: 0 },
+        ]
+
+    },
+       {
+        title:"basicJump",
+        playerStartingPos:{x:2,y:10},
+        foreGround: "./assets/levels/basicJump.png",
+        platforms:[
+            { x:0,y:0,w:1,h:30},
+            { x: 0, y: 3, w: 5, h: 2 },
+            { x: 0, y: 14, w: 30, h: 1 },
+            { x: 18, y: 11, w: 12, h: 3 },
+            { x: 22, y: 7, w: 8, h: 2 },
+            { x: 26, y: 3, w: 5, h: 2 },
+            { x: 29, y: 3, w: 1, h: 12 },
+            { x: 5, y: 7, w: 10, h: 2 },
+            
+
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2 , h: 40},
+            { x: -2, y: -10, w: 2, h: 40 }
+        ],
+        deathBlocks: [
+        ],
+        items: [
+            { x: 27, y: 10, w: 0.5, h: 0.5, type: "key" },
+            { x: 27, y: 6, w: 0.5, h: 0.5, type: "key" },
+            { x: 2, y: 2, w: 0.5, h: 0.5, type: "key" },
+        ],
+        doors: [
+            { x: 29, y: 0, w: 1, h: 3, color: 'brown', keyNumber: 3 },
+        ]
+        
+    },
+    {
+        title:"basicJump",
+        playerStartingPos:{x:2,y:10},
+        foreGround: "./assets/levels/basicJump.png",
+        platforms:[
+            { x:0,y:0,w:1,h:30},
+            { x: 0, y: 3, w: 5, h: 2 },
+            { x: 0, y: 14, w: 30, h: 1 },
+            { x: 18, y: 11, w: 12, h: 3 },
+            { x: 22, y: 7, w: 8, h: 2 },
+            { x: 26, y: 3, w: 5, h: 2 },
+            { x: 29, y: 3, w: 1, h: 12 },
+            { x: 5, y: 7, w: 10, h: 2 },
+            
+
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2 , h: 40},
+            { x: -2, y: -10, w: 2, h: 40 }
+        ],
+        deathBlocks: [
+        ],
+        items: [
+            { x: 27, y: 10, w: 0.5, h: 0.5, type: "key" },
+            { x: 27, y: 6, w: 0.5, h: 0.5, type: "key" },
+            { x: 2, y: 2, w: 0.5, h: 0.5, type: "key" },
+        ],
+        doors: [
+            { x: 29, y: 0, w: 1, h: 3, color: 'brown', keyNumber: 3 },
+        ]
+        
+    },
+    {
+        title: "deathJumps",
+        playerStartingPos: { x: 1, y: 0 },
+        foreGround: "./assets/levels/deathJumps.png",
+        platforms: [
+            { x: 0, y: 3, w: 4, h: 27 },
+            { x: 0, y: 14, w: 15, h: 1 },
+            { x: 7, y: 8, w: 3, h: 8 },
+            { x: 14, y: 9, w: 3, h: 8 },
+
+            {x:20,y:6,w:3,h:0.5},
+
+            { x: 26, y: 3, w: 4, h: 12 },
+
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2, h: 40 },
+            { x: -2, y: -10, w: 2, h: 40 }
+        ],
+        deathBlocks: [
+            { x: 4, y: 13, w: 3, h: 1 },
+            { x: 10, y: 13, w: 4, h: 1 },
+        ],
+        items: [
+
+        ],
+        doors: [
+            { x: 29, y: 0, w: 1, h: 3, color: 'brown', keyNumber: 0 },
+        ]
+
+    },
+    {
         title: "doubleJump",
         playerStartingPos: { x: 6, y: 10 },
-        foreGround:"./assets/doubleJump.png",
+        foreGround:"./assets/levels/doubleJump.png",
         platforms: [
             { x: 0, y: 1, w: 5, h: 6},
             { x: 0, y: 12, w: 8, h: 3},
@@ -13,7 +131,6 @@ const levels = [
             { x: 27, y: 3, w: 3, h: 12},
         ],
         deathBlocks: [
-            { x: 0, y: 11, w: 1, h: 1},
         ],
         items: [
             { x: 15, y: 8, w: 0.5, h: 0.5, type: "key" },
@@ -28,7 +145,7 @@ const levels = [
     {
         title: "doubleJumpIslands",
         playerStartingPos: { x: 1, y: 10 },
-        foreGround: "./assets/DoubleJumpIslands.png",
+        foreGround: "./assets/levels/DoubleJumpIslands.png",
         platforms: [
             { x: 0, y: 12, w: 8, h: 3},
             { x: 0, y: 2, w: 6, h: 0.5},
