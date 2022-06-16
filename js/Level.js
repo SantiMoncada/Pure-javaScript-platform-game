@@ -91,8 +91,8 @@ class Level {
         this.currentBoxes.forEach((box, i, arr) => {
             const copy = JSON.parse(JSON.stringify(arr));
             copy.splice(i, 1);
-            //box.updatePhysics([...this.platforms, ...copy,{ pos: this.referenceToPlayer.pos, size: this.referenceToPlayer.playerSize }]);
-            box.updatePhysics([{ pos: this.referenceToPlayer.pos, size: this.referenceToPlayer.playerSize }, ...this.platforms, ...copy]);
+            //box.updatePhysics([...this.platforms, ...copy,{ pos: this.referenceToPlayer.pos, size: this.referenceToPlayer.size }]);
+            box.updatePhysics([{ pos: this.referenceToPlayer.pos, size: this.referenceToPlayer.size }, ...this.platforms, ...copy]);
         })
 
 
