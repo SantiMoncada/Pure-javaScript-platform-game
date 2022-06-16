@@ -14,11 +14,12 @@ const platformGame = {
     tileSize: undefined,
     bigTileSize: undefined,
     levelIndex: 0,
+    startBoxesPlayerHitBox : [],
     init(canvasId) {
         this.ctx = document.querySelector(canvasId).getContext('2d');
         this.setDimensions(canvasId);
         this.player = new Player(this.ctx, this.canvasSize, this.tileSize, 20, 20);
-        this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player);
+        this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player , this.tileSize);
         this.createEventListeners()
         this.drawAll();
     },
@@ -74,7 +75,7 @@ const platformGame = {
     },
     updateInput() {
         if (this.keysPressed.up && !this.keysPressed.previousUp) {
-            this.player.jump(this.level.platforms);
+            this.player.jump([...this.level.platforms, ...this.startBoxesPlayerHitBox]);
         }
         this.keysPressed.previousUp = this.keysPressed.up;
         if (this.keysPressed.left) {
@@ -88,12 +89,27 @@ const platformGame = {
         setInterval(() => {
             this.clearAll();
             this.updateInput();
-            this.player.updatePhysics(this.keysPressed.up, this.level.platforms);
             this.level.draw();
+
+
+            this.startBoxesPlayerHitBox = [];
+
+            this.level.currentBoxes.forEach(box => {
+                this.startBoxesPlayerHitBox.push(box.getHitboxPlayerInteraction());
+            });
+            
+            this.player.updatePhysics(this.keysPressed.up, [...this.level.platforms, ...this.startBoxesPlayerHitBox]);
+
+
+            //this.player.updatePhysics(this.keysPressed.up, [...this.level.platforms, ...this.level.startBoxes]);
+
+            //this.player.updatePhysics(this.keysPressed.up,this.level.platforms);
+            
             this.player.draw();
             if (this.level.isFinished()) {
                 this.levelIndex++;
-                this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player);   //TEMP TODO HARDCODED
+                console.log(this.levelIndex);
+                this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player, this.tileSize);   //TEMP TODO HARDCODED
             }
         }, 1000 / this.fps)
     },

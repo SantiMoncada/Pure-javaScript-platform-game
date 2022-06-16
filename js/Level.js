@@ -1,5 +1,5 @@
 class Level {
-    constructor(ctx, canvasSize, tile, levelIndex, player) {
+    constructor(ctx, canvasSize, tile, levelIndex, player, smallTile) {
         this.ctx = ctx;
         this.canvasSize = canvasSize;
         this.referenceToPlayer = player;
@@ -15,6 +15,12 @@ class Level {
         this.background = "./assets/backGround.png";
         this.backgroundImageInstance = undefined;
         this.foreGroundImageInstance = undefined;
+        this.smallTile = smallTile;
+
+        this.startBoxes = [];
+        this.boxes=[];
+        this.currentBoxes = [];
+
         this.init(ctx, canvasSize, levelIndex);
     }
     init(ctx, canvasSize, levelIndex) {
@@ -34,7 +40,12 @@ class Level {
         levelLayout.doors.forEach(block => {
             this.door = (new Door(this.ctx, this.canvasSize, this.tile, block.x, block.y, block.w, block.h, block.color, block.keyNumber));
         });
-        
+        levelLayout.boxes.forEach(box=>{
+            console.log("creating box" , box);
+            this.boxes.push(new Box(this.ctx, this.canvasSize, this.smallTile, box.x,box.y,box.w,box.h));
+        });
+
+
         this.backgroundImageInstance = new Image();
         this.backgroundImageInstance.src = this.background;
         this.foreGroundImageInstance = new Image();
@@ -43,6 +54,7 @@ class Level {
         this.referenceToPlayer.resetTo(this.playerStartingPos);
 
         this.currentItems = [...this.items];
+        this.currentBoxes = [...this.boxes];
 
 
 
@@ -76,7 +88,15 @@ class Level {
     draw() {
 
 
-        console.log("x:", parseInt(this.referenceToPlayer.pos.x / this.tile), " y:", parseInt(this.referenceToPlayer.pos.y / this.tile))//level building
+        this.currentBoxes.forEach((box,i,arr)=>{
+            const copy = JSON.parse(JSON.stringify(arr));
+            copy.splice(i,1);
+            //box.updatePhysics([...this.platforms, ...copy,{ pos: this.referenceToPlayer.pos, size: this.referenceToPlayer.playerSize }]);
+            box.updatePhysics([{ pos: this.referenceToPlayer.pos, size: this.referenceToPlayer.playerSize }, ...this.platforms, ...copy]);
+        })
+
+
+        //console.log("x:", parseInt(this.referenceToPlayer.pos.x / this.tile), " y:", parseInt(this.referenceToPlayer.pos.y / this.tile))//level building
 
         if (this.door.keyNumber <= this.keysCollected) {
             this.door.open();
@@ -92,6 +112,8 @@ class Level {
             this.resetLevel();
         }
         
+
+
         this.ctx.drawImage(this.backgroundImageInstance, 0, 0, 30 * this.tile, 15 * this.tile);
 
         this.deathBlocks.forEach(block => {
@@ -120,16 +142,20 @@ class Level {
             }
         }
         this.currentItems.splice(i, 1);
+        this.currentBoxes.forEach(box => {
+            box.draw();
+        });
+
 
         this.ctx.drawImage(this.foreGroundImageInstance,0,0,30*this.tile,15*this.tile);
         this.currentItems.forEach((item) => {
             item.draw();
         });
 
-        //debug HARDCODED TODO
-         this.platforms.forEach(block => {
-             block.draw();
-         });
+        //  //debug HARDCODED TODO
+        //    this.platforms.forEach(block => {
+        //        block.draw();
+        //    });
 
 
         this.door.draw();
