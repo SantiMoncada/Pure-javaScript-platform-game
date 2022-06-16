@@ -156,7 +156,7 @@ const levels = [
             { x: 29, y: 0, w: 1, h: 3, color: 'brown', keyNumber: 0 },
         ],
         boxes: [
-            { x: 700, y: 20, w: 100, h: 200 },
+            { x: 700, y: 20, w: 100, h: 150 },
         ]
 
     },

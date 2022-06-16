@@ -41,10 +41,11 @@ class Level {
             this.door = (new Door(this.ctx, this.canvasSize, this.tile, block.x, block.y, block.w, block.h, block.color, block.keyNumber));
         });
         levelLayout.boxes.forEach(box => {
-            console.log("creating box", box);
             this.boxes.push(new Box(this.ctx, this.canvasSize, this.smallTile, box.x, box.y, box.w, box.h));
         });
 
+
+        
 
         this.backgroundImageInstance = new Image();
         this.backgroundImageInstance.src = this.background;
@@ -108,6 +109,9 @@ class Level {
         //TEMP TODO HARDCODED
 
         if (!this.isPlayerAlive(this.referenceToPlayer)) {
+            this.referenceToPlayer.deathSound.pause();
+            this.referenceToPlayer.deathSound.currentTime = 0;
+            this.referenceToPlayer.deathSound.play();
             this.referenceToPlayer.resetTo(this.playerStartingPos);
             this.resetLevel();
         }
@@ -127,6 +131,7 @@ class Level {
             const item = this.currentItems[i];
 
             if (this.referenceToPlayer.collidedWith(item)) {
+                item.pickUpSound.play();
                 switch (item.type) {
                     case "key":
                         this.keysCollected++;

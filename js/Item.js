@@ -11,6 +11,8 @@ class Item {
         this.verticalOffset = 0;
         this.goingUp = true;
         this.frameIndex = 0;
+        this.pickUpSound = new Audio("./assets/audio/PickUp.wav");
+        this.pickUpSound.volume = 0.5;
         this.init();
 
     }
@@ -43,7 +45,6 @@ class Item {
             this.verticalOffset += this.tile / 100;
             this.verticalOffset++;
 
-            console.log("up")
 
         } else {
             this.goingUp = false;
@@ -51,10 +52,9 @@ class Item {
 
         if (this.verticalOffset >= 0 && !this.goingUp) {
             this.verticalOffset -= this.tile / 250;
-            console.log(this.tile)
             this.verticalOffset--;
 
-            console.log("down")
+
         } else {
             this.goingUp = true;
         }
@@ -64,7 +64,6 @@ class Item {
         this.frameIndex++;
 
         if (this.frameIndex % 2 == 0) {
-            console.log("updating")
             this.updateVerticalOffet();
         }
 

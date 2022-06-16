@@ -11,6 +11,7 @@ class Block {
         this.ctx.fillRect(this.pos.x, this.pos.y, this.size.w, this.size.h);
 
     }
+    
 
 }
 
@@ -24,6 +25,7 @@ class Door extends Block {
         this.init();
     }
     init(){
+        this.audio = new Audio("./assets/audio/mailBoxOpen.mp3");
         this.imageInstance = new Image();
         this.imageInstance.src = this.imageClosedSrc;
     }
@@ -40,8 +42,11 @@ class Door extends Block {
     }
 
     open(){
-        this.isOpen = true;
-        this.imageInstance.src = this.imageOpenSrc;
+        if(!this.isOpen){
+            this.audio.play();
+            this.isOpen = true;
+            this.imageInstance.src = this.imageOpenSrc;
+        }
     }
     close(){
         this.isOpen = false;

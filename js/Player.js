@@ -1,19 +1,19 @@
-class Player {
+class Player extends PhysicsObject {
     constructor(ctx, canvasSize, tile, playerWidth, playerHeight) {
-        this.ctx = ctx;
-        this.canvasSize = canvasSize;
-        this.tile = tile;
-        this.pos = { x: undefined, y: undefined };
-        this.size = { w: playerWidth * this.tile, h: playerHeight * this.tile };
-        this.speed = { x: 0, y: 0 };
+        super(ctx, canvasSize, tile, playerWidth, playerHeight);
+
         this.jumping = false;
         this.jumpForce = 7 * this.tile;
         this.pushingForce = 2 * this.tile;
-        this.physics = { gravity: .15 * this.tile, drag: .7 };
+
+
         this.wallJump = false;
         this.doubleJump = false;
         this.doubleJumping = false;
         this.playerImage = "./assets/Crate.png";
+        this.jumpSound = new Audio("./assets/audio/Jump.wav");
+        this.deathSound = new Audio("./assets/audio/Death.wav");
+        this.doubleJumpSound = new Audio("./assets/audio/DoubleJump.wav");
         this.init();
     }
     init() {
@@ -44,11 +44,11 @@ class Player {
             this.speed.x *= -0.5;
         }
         //console.log("x:",this.speed.x.toFixed(3)," y:",this.speed.y.toFixed(3))
-        /*to stop upwards speed on  a jump when the up arrow key is released, check if the key is pressed,
-        if it is a player iniated jump and if the speed is going upwards,
-        then set the jump variable to false to not get in this conditional again, and set the speed to 20%,
-        the else if checks if the player has stopped going upwards to give it the ability to jump again
-        */
+        //to stop upwards speed on  a jump when the up arrow key is released, check if the key is pressed,
+        //if it is a player iniated jump and if the speed is going upwards,
+        //then set the jump variable to false to not get in this conditional again, and set the speed to 20%,
+        //the else if checks if the player has stopped going upwards to give it the ability to jump again
+
         if (!keyUp && this.jumping && this.speed.y < 0) {
             this.jumping = false;
             this.speed.y *= 0.2;
@@ -68,7 +68,9 @@ class Player {
         if (!this.jumping && gorunded) {
             this.speed.y = -this.jumpForce;
             this.jumping = true;
+            this.jumpSound.play();
         } else if (this.doubleJump && !this.doubleJumping) {
+            this.doubleJumpSound.play();
             this.speed.y = -this.jumpForce;
             this.doubleJumping = true;
         }
@@ -78,82 +80,6 @@ class Player {
     }
     moveLeft() {
         this.speed.x -= this.pushingForce;
-    }
-    //using a box casting to check if it colides with a block
-    isGrounded(blocks) {
-        const boxCastLength = 1 * this.tile;
-        let output = false;
-        let boxCast;
-        if (this.wallJump) {
-            boxCast = { x: this.pos.x - 1, y: this.pos.y + this.size.h, h: boxCastLength, w: this.size.w + 2 };
-        } else {
-            boxCast = { x: this.pos.x, y: this.pos.y + this.size.h, h: boxCastLength, w: this.size.w };
-        }
-        for (const block of blocks) {
-            if (block.pos.x < boxCast.x + boxCast.w &&
-                block.pos.x + block.size.w > boxCast.x &&
-                block.pos.y < boxCast.y + boxCast.h &&
-                block.size.h + block.pos.y > boxCast.y) {
-                output = true;
-                break;
-            }
-        }
-        return output;
-    }
-    checkForCollision(blocks) {
-        let output = { x: null, y: null };
-        for (const block of blocks) {
-            //check if the player has colided with a block
-            if (block.pos.x < this.pos.x + this.size.w &&
-                block.pos.x + block.size.w > this.pos.x &&
-                block.pos.y < this.pos.y + this.size.h &&
-                block.size.h + block.pos.y > this.pos.y) {
-                //return the closes cords to the currrent cords from the previous cords with out cliping
-                //return 0 if the cords on x or y stay the same
-                //compare in all the four directions to get the shortest path outside the block
-                const outUp = - block.pos.y + this.pos.y + this.size.h;
-                const outDown = block.pos.y + block.size.h - this.pos.y;
-                const outLeft = - block.pos.x + this.pos.x + this.size.w;
-                const outRight = block.pos.x + block.size.w - this.pos.x;
-                //get the smaller one
-                const min = Math.min(outUp, outDown, outLeft, outRight);
-                //we get the max in case there are multiple collisions to get the furthest away that we need
-                if (outUp === min) {
-                    output.y = Math.max(output.y, this.pos.y - outUp);
-                } else if (outDown === min) {
-                    output.y = Math.max(output.y, this.pos.y + outDown);
-                } else if (outLeft === min) {
-                    output.x = Math.max(output.x, this.pos.x - outLeft);
-                } else if (outRight === min) {
-                    output.x = Math.max(output.x, this.pos.x + outRight);
-                }
-            }
-        }
-        return output;
-    }
-    isColliding(blocks) {
-        let output = false;
-        for (const block of blocks) {
-            //check if the player has colided with a block
-            if (block.pos.x < this.pos.x + this.size.w &&
-                block.pos.x + block.size.w > this.pos.x &&
-                block.pos.y < this.pos.y + this.size.h &&
-                block.size.h + block.pos.y > this.pos.y) {
-                output = true;
-                break;
-            }
-        }
-        return output;
-    }
-    collidedWith(block) {
-        let output = false;
-        if (block.pos.x < this.pos.x + this.size.w &&
-            block.pos.x + block.size.w > this.pos.x &&
-            block.pos.y < this.pos.y + this.size.h &&
-            block.size.h + block.pos.y > this.pos.y) {
-            output = true;
-        }
-        return output;
     }
     resetTo(newPos) {
         this.pos = { x: newPos.x * this.tile, y: newPos.y * this.tile };
@@ -178,8 +104,4 @@ class Player {
         this.wallJump = false;
         this.doubleJump = false;
     }
-
 }
-
-
-

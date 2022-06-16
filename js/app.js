@@ -11,15 +11,21 @@ const platformGame = {
     },
     keysPressed: { up: false, left: false, right: false, previousUp: false },
     fps: 60,
+    backgorundForestSound: undefined,
+    soundStarted:false,
     tileSize: undefined,
     bigTileSize: undefined,
-    levelIndex: 0,
+    levelIndex: 3,
     startBoxesPlayerHitBox: [],
     init(canvasId) {
         this.ctx = document.querySelector(canvasId).getContext('2d');
         this.setDimensions(canvasId);
         this.player = new Player(this.ctx, this.canvasSize, this.tileSize, 20, 20);
         this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player, this.tileSize);
+        this.backgorundForestSound = new Audio("./assets/audio/ForestSound.mp3");
+        this.finishedLevelSound = new Audio("./assets/audio/Finished.wav");
+        this.backgorundForestSound.loop = true;
+        this.backgorundForestSound.volume = 0.2;
         this.createEventListeners()
         this.drawAll();
     },
@@ -45,6 +51,10 @@ const platformGame = {
     },
     createEventListeners() {
         document.onkeydown = e => {
+            if (!this.soundStarted){
+                this.backgorundForestSound.play();
+                this.soundStarted = true;
+            }
             const { key } = e
             switch (key) {
                 case 'ArrowLeft':
@@ -109,6 +119,7 @@ const platformGame = {
             if (this.level.isFinished()) {
                 this.levelIndex++;
                 console.log(this.levelIndex);
+                this.finishedLevelSound.play();
                 this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player, this.tileSize);   //TEMP TODO HARDCODED
             }
         }, 1000 / this.fps)
