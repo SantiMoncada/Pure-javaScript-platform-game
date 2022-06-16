@@ -16,7 +16,7 @@ const platformGame = {
     tileSize: undefined,
     bigTileSize: undefined,
     gameDone : false,
-    levelIndex: 12,
+    levelIndex: 0,
     startBoxesPlayerHitBox: [],
     init(canvasId) {
         this.ctx = document.querySelector(canvasId).getContext('2d');
