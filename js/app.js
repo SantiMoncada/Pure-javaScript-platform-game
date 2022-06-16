@@ -15,14 +15,16 @@ const platformGame = {
     soundStarted:false,
     tileSize: undefined,
     bigTileSize: undefined,
-    levelIndex: 3,
+    gameDone : false,
+    levelIndex: 12,
     startBoxesPlayerHitBox: [],
     init(canvasId) {
         this.ctx = document.querySelector(canvasId).getContext('2d');
         this.setDimensions(canvasId);
         this.player = new Player(this.ctx, this.canvasSize, this.tileSize, 20, 20);
         this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player, this.tileSize);
-        this.backgorundForestSound = new Audio("./assets/audio/ForestSound.mp3");
+        this.backgorundForestSound = new Audio("./assets/audio/Spider.mp3");
+        this.endingMusic = new Audio("./assets/audio/Undertale.mp3");
         this.finishedLevelSound = new Audio("./assets/audio/Finished.wav");
         this.backgorundForestSound.loop = true;
         this.backgorundForestSound.volume = 0.2;
@@ -98,29 +100,44 @@ const platformGame = {
     drawAll() {
         setInterval(() => {
             this.clearAll();
-            this.updateInput();
-            this.level.draw();
+            if(!this.gameDone){
+                this.updateInput();
+                this.level.draw();
 
 
-            this.startBoxesPlayerHitBox = [];
+                this.startBoxesPlayerHitBox = [];
 
-            this.level.currentBoxes.forEach(box => {
-                this.startBoxesPlayerHitBox.push(box.getHitboxPlayerInteraction());
-            });
+                this.level.currentBoxes.forEach(box => {
+                    this.startBoxesPlayerHitBox.push(box.getHitboxPlayerInteraction());
+                });
 
-            this.player.updatePhysics(this.keysPressed.up, [...this.level.platforms, ...this.startBoxesPlayerHitBox]);
+                this.player.updatePhysics(this.keysPressed.up, [...this.level.platforms, ...this.startBoxesPlayerHitBox]);
 
 
-            //this.player.updatePhysics(this.keysPressed.up, [...this.level.platforms, ...this.level.startBoxes]);
+                //this.player.updatePhysics(this.keysPressed.up, [...this.level.platforms, ...this.level.startBoxes]);
 
-            //this.player.updatePhysics(this.keysPressed.up,this.level.platforms);
+                //this.player.updatePhysics(this.keysPressed.up,this.level.platforms);
 
-            this.player.draw();
-            if (this.level.isFinished()) {
-                this.levelIndex++;
-                console.log(this.levelIndex);
-                this.finishedLevelSound.play();
-                this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player, this.tileSize);   //TEMP TODO HARDCODED
+                this.player.draw();
+                if (this.level.isFinished()) {
+                    this.levelIndex++;
+                    console.log(this.levelIndex);
+                    this.finishedLevelSound.play();
+                    if(this.levelIndex < levels.length){
+                        this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player, this.tileSize);   //TEMP TODO HARDCODED
+                    }else{
+                        this.gameDone = true;
+                    }
+                }
+            }else{
+                this.backgorundForestSound.pause();
+                this.endingMusic.play();
+                this.ctx.fillStyle = "black";
+                this.ctx.fillRect(0, 0, this.canvasSize.w, this.canvasSize.h);
+                this.ctx.fillStyle = "white"
+                this.ctx.strokeStyle = "white";
+                this.ctx.font = '90px serif';
+                this.ctx.strokeText('The box made it :,)', this.canvasSize.w / 2, this.canvasSize.h / 2);
             }
         }, 1000 / this.fps)
     },

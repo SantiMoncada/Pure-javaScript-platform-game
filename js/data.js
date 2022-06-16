@@ -35,6 +35,7 @@ const levels = [
             { x: 30, y: 385, w: 20, h: 20 },
             { x: 50, y: 385, w: 20, h: 20 },
             { x: 60, y: 365, w: 20, h: 20 },
+            
         ]
     },
     {
@@ -54,7 +55,7 @@ const levels = [
 
             //outOfBoundsWalls
             { x: 30, y: -10, w: 2, h: 40 },
-            { x: -2, y: -10, w: 2, h: 40 }
+            { x: 0, y: -10, w: 0.1, h: 40 },
         ],
         deathBlocks: [
         ],
@@ -82,6 +83,10 @@ const levels = [
             { x: 22, y: 8, w: 8, h: 4 },
             { x: 27, y: 3, w: 3, h: 5 },
 
+
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2, h: 40 },
+            { x: 0, y: -10, w: 0.1, h: 40 },
 
 
 
@@ -118,7 +123,7 @@ const levels = [
 
             //outOfBoundsWalls
             { x: 30, y: -10, w: 2, h: 40 },
-            { x: -2, y: -10, w: 2, h: 40 }
+            { x: 0, y: -10, w: 0.1, h: 40 },
         ],
         deathBlocks: [
             { x: 4, y: 13, w: 3, h: 1 },
@@ -142,10 +147,9 @@ const levels = [
             { x: 14, y: 8, w: 3, h: 2 },
             { x: 26, y: 3, w: 20, h: 10 },
 
-
             //outOfBoundsWalls
             { x: 30, y: -10, w: 2, h: 40 },
-            { x: -2, y: -10, w: 2, h: 40 }
+            { x: 0, y: -10, w: 0.1, h: 40 },
         ],
         deathBlocks: [
         ],
@@ -172,6 +176,13 @@ const levels = [
             { x: 8, y: 6, w: 5, h: 9 },
             { x: 18, y: 6, w: 4, h: 9 },
             { x: 27, y: 3, w: 3, h: 12 },
+
+
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2, h: 40 },
+            { x: 0, y: -10, w: 0.1, h: 40 },
+
+
         ],
         deathBlocks: [],
         items: [
@@ -197,6 +208,10 @@ const levels = [
             { x: 24, y: 13, w: 6, h: 2 },
             { x: 26, y: 7, w: 4, h: 0.5 },
             { x: 26, y: 2, w: 4, h: 0.5 },
+
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2, h: 40 },
+            { x: 0, y: -10, w: 0.1, h: 40 },
         ],
         deathBlocks: [
 
@@ -228,6 +243,11 @@ const levels = [
             { x: 19, y: 8, w: 5, h: 2 },
             { x: 21, y: 1, w: 3, h: 7 },
             { x: 27, y: 3, w: 3, h: 12 },
+
+
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2, h: 40 },
+            { x: 0, y: -10, w: 0.1, h: 40 },
 
 
 
@@ -268,6 +288,11 @@ const levels = [
             { x: 21, y: 10, w: 2, h: 0.5 },
             { x: 26, y: 3, w: 5, h: 0.5 },
             { x: 27, y: 10, w: 3, h: 5 },
+
+
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2, h: 40 },
+            { x: 0, y: -10, w: 0.1, h: 40 },
         ],
         deathBlocks: [
             { x: 1, y: 1, w: 1, h: 2 },
@@ -297,7 +322,9 @@ const levels = [
             { x: 28, y: 3, w: 2, h: 12 },
 
 
-
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2, h: 40 },
+            { x: 0, y: -10, w: 0.1, h: 40 },
 
         ],
         deathBlocks: [
@@ -328,8 +355,9 @@ const levels = [
             { x: 27, y: 3, w: 3, h: 12 },
 
 
-
-
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2, h: 40 },
+            { x: 0, y: -10, w: 0.1, h: 40 },
 
         ],
         deathBlocks: [
@@ -364,6 +392,9 @@ const levels = [
 
 
 
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2, h: 40 },
+            { x: 0, y: -10, w: 0.1, h: 40 },
         ],
         deathBlocks: [
             { x: 10, y: 13, w: 17, h: 1 },
@@ -397,6 +428,9 @@ const levels = [
 
 
 
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2, h: 40 },
+            { x: 0, y: -10, w: 0.1, h: 40 },
         ],
         deathBlocks: [
             { x: 24, y: 13, w: 2, h: 1 },
