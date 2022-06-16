@@ -18,7 +18,7 @@ class Level {
         this.smallTile = smallTile;
 
         this.startBoxes = [];
-        this.boxes=[];
+        this.boxes = [];
         this.currentBoxes = [];
 
         this.init(ctx, canvasSize, levelIndex);
@@ -26,7 +26,7 @@ class Level {
     init(ctx, canvasSize, levelIndex) {
         const levelLayout = levels[levelIndex];
 
-        this.playerStartingPos = { x: levelLayout.playerStartingPos.x * 34.1333, y: levelLayout.playerStartingPos.y * 34.1333};
+        this.playerStartingPos = { x: levelLayout.playerStartingPos.x * 34.1333, y: levelLayout.playerStartingPos.y * 34.1333 };
 
         levelLayout.platforms.forEach(block => {
             this.platforms.push(new Block(this.ctx, this.canvasSize, this.tile, block.x, block.y, block.w, block.h));
@@ -40,9 +40,9 @@ class Level {
         levelLayout.doors.forEach(block => {
             this.door = (new Door(this.ctx, this.canvasSize, this.tile, block.x, block.y, block.w, block.h, block.color, block.keyNumber));
         });
-        levelLayout.boxes.forEach(box=>{
-            console.log("creating box" , box);
-            this.boxes.push(new Box(this.ctx, this.canvasSize, this.smallTile, box.x,box.y,box.w,box.h));
+        levelLayout.boxes.forEach(box => {
+            console.log("creating box", box);
+            this.boxes.push(new Box(this.ctx, this.canvasSize, this.smallTile, box.x, box.y, box.w, box.h));
         });
 
 
@@ -88,9 +88,9 @@ class Level {
     draw() {
 
 
-        this.currentBoxes.forEach((box,i,arr)=>{
+        this.currentBoxes.forEach((box, i, arr) => {
             const copy = JSON.parse(JSON.stringify(arr));
-            copy.splice(i,1);
+            copy.splice(i, 1);
             //box.updatePhysics([...this.platforms, ...copy,{ pos: this.referenceToPlayer.pos, size: this.referenceToPlayer.playerSize }]);
             box.updatePhysics([{ pos: this.referenceToPlayer.pos, size: this.referenceToPlayer.playerSize }, ...this.platforms, ...copy]);
         })
@@ -111,16 +111,16 @@ class Level {
             this.referenceToPlayer.resetTo(this.playerStartingPos);
             this.resetLevel();
         }
-        
+
 
 
         this.ctx.drawImage(this.backgroundImageInstance, 0, 0, 30 * this.tile, 15 * this.tile);
 
-        this.deathBlocks.forEach(block => {
-            block.draw();
-        });
-        
-        
+        // this.deathBlocks.forEach(block => {              //For level creation
+        //     block.draw();
+        // });
+
+
 
         let i;
         for (i = 0; i < this.currentItems.length; i++) {
@@ -147,7 +147,7 @@ class Level {
         });
 
 
-        this.ctx.drawImage(this.foreGroundImageInstance,0,0,30*this.tile,15*this.tile);
+        this.ctx.drawImage(this.foreGroundImageInstance, 0, 0, 30 * this.tile, 15 * this.tile);
         this.currentItems.forEach((item) => {
             item.draw();
         });

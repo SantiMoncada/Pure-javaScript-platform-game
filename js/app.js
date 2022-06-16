@@ -13,13 +13,13 @@ const platformGame = {
     fps: 60,
     tileSize: undefined,
     bigTileSize: undefined,
-    levelIndex: 0,
-    startBoxesPlayerHitBox : [],
+    levelIndex: 9,
+    startBoxesPlayerHitBox: [],
     init(canvasId) {
         this.ctx = document.querySelector(canvasId).getContext('2d');
         this.setDimensions(canvasId);
         this.player = new Player(this.ctx, this.canvasSize, this.tileSize, 20, 20);
-        this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player , this.tileSize);
+        this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player, this.tileSize);
         this.createEventListeners()
         this.drawAll();
     },
@@ -97,14 +97,14 @@ const platformGame = {
             this.level.currentBoxes.forEach(box => {
                 this.startBoxesPlayerHitBox.push(box.getHitboxPlayerInteraction());
             });
-            
+
             this.player.updatePhysics(this.keysPressed.up, [...this.level.platforms, ...this.startBoxesPlayerHitBox]);
 
 
             //this.player.updatePhysics(this.keysPressed.up, [...this.level.platforms, ...this.level.startBoxes]);
 
             //this.player.updatePhysics(this.keysPressed.up,this.level.platforms);
-            
+
             this.player.draw();
             if (this.level.isFinished()) {
                 this.levelIndex++;
