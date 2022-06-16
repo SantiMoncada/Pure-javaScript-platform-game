@@ -1,7 +1,7 @@
 const levels = [
     {
         title: "start",
-        playerStartingPos: { x: 2, y: 13 },
+        playerStartingPos: { x: 1.465, y: 12 },
         foreGround: "./assets/levels/start.png",
         platforms: [
             { x: 0, y: 13, w: 30, h: 2 },
@@ -24,10 +24,17 @@ const levels = [
             { x: 29, y: 0, w: 1, h: 3, color: 'brown', keyNumber: 0 },
         ],
         boxes: [
-            { x: 10, y: 20, w: 40, h: 40 },
-            { x: 70, y: 20, w: 20, h: 20 },
-            { x: 110, y: 20, w: 20, h: 20 },
-            { x: 110, y: 60, w: 20, h: 20 },
+            { x: 10, y: 405, w: 40, h: 40 },
+            { x: 50, y: 425, w: 20, h: 20 },
+            { x: 70, y: 425, w: 20, h: 20 },
+            { x: 90, y: 425, w: 20, h: 20 },
+            { x: 110, y: 425, w: 20, h: 20 },
+            { x: 130, y: 425, w: 20, h: 20 },
+            { x: 70, y: 385, w: 40, h: 40 },
+            { x: 110, y: 405, w: 20, h: 20 },
+            { x: 30, y: 385, w: 20, h: 20 },
+            { x: 50, y: 385, w: 20, h: 20 },
+            { x: 60, y: 365, w: 20, h: 20 },
         ]
     },
     {
