@@ -177,7 +177,7 @@ const levels = [
         items: [
             { x: 15, y: 8, w: 0.5, h: 0.5, type: "key" },
             { x: 6, y: 6, w: 0.5, h: 0.5, type: "key" },
-            { x: 4, y: 10, w: 0.5, h: 0.5, type: "wallJump" },
+            { x: 4, y: 10, w: 1, h: 1, type: "wallJump" },
 
         ],
         doors: [
@@ -204,7 +204,7 @@ const levels = [
         items: [
             { x: 1, y: 1, w: 0.5, h: 0.5, type: "key" },
             { x: 15, y: 10, w: 0.5, h: 0.5, type: "key" },
-            { x: 27, y: 11, w: 0.5, h: 0.5, type: "doubleJump" },
+            { x: 27, y: 11, w: 1, h: 1, type: "doubleJump" },
 
         ],
         doors: [
@@ -217,8 +217,8 @@ const levels = [
         playerStartingPos: { x: 1, y: 12 },
         foreGround: "./assets/levels/cavernLevel.png",
         platforms: [
-            { x: 0, y: 0, w: 4, h: 8 },
-            { x: 0, y: 12, w: 10, h: 3 },
+            { x: 0, y: 0, w: 5, h: 9 },
+            { x: 0, y: 12, w: 11, h: 3 },
             { x: 5, y: 0, w: 23, h: 1 },
             { x: 8, y: 4, w: 9, h: 5 },
             { x: 11, y: 1, w: 3, h: 3 },
@@ -240,11 +240,11 @@ const levels = [
             { x: 9.25, y: 2.25, w: 0.5, h: 0.5, type: "key" },
             { x: 12.25, y: 10.25, w: 0.5, h: 0.5, type: "key" },
 
-            { x: 15.25, y: 2.25, w: 0.5, h: 0.5, type: "wallJump" },
+            { x: 15, y: 2, w: 1, h: 1, type: "wallJump" },
 
         ],
         doors: [
-            { x: 29, y: 0, w: 1, h: 2, color: 'brown', keyNumber: 2 },
+            { x: 29, y: 0, w: 1, h: 3, color: 'brown', keyNumber: 2 },
         ],
         boxes: [],
 
@@ -255,9 +255,9 @@ const levels = [
         playerStartingPos: { x: 1, y: 10 },
         foreGround: "./assets/levels/wallJumpSpikes.png",
         platforms: [
-            { x: 0, y: 12, w: 6, h: 3 },
+            { x: 0, y: 12, w: 5, h: 3 },
             { x: 0, y: 0, w: 3, h: 1 },
-            { x: 0, y: 1, w: 1, h: 5 },
+            { x: 0, y: 1, w: 1, h: 4 },
             { x: 1, y: 3, w: 5, h: 2 },
             { x: 6, y: 2, w: 2, h: 3 },
             { x: 6, y: 8, w: 3, h: 0.5 },
@@ -277,7 +277,7 @@ const levels = [
         items: [
             { x: 2.5, y: 1.5, w: 0.5, h: 0.5, type: "key" },
             { x: 15.25, y: 10, w: 0.5, h: 0.5, type: "key" },
-            { x: 27, y: 8, w: 0.5, h: 0.5, type: "wallJump" },
+            { x: 27, y: 8, w: 1, h: 1, type: "wallJump" },
 
         ],
         doors: [
@@ -306,7 +306,7 @@ const levels = [
         items: [
             { x: 2, y: 1.2, w: 0.5, h: 0.5, type: "key" },
             { x: 15, y: 8, w: 0.5, h: 0.5, type: "key" },
-            { x: 3, y: 10, w: 0.5, h: 0.5, type: "wallJump" },
+            { x: 3, y: 10, w: 1, h: 1, type: "wallJump" },
 
         ],
         doors: [
@@ -338,7 +338,7 @@ const levels = [
         items: [
             { x: 2, y: 1.2, w: 0.5, h: 0.5, type: "key" },
             { x: 13, y: 6, w: 0.5, h: 0.5, type: "key" },
-            { x: 16.25, y: 7.25, w: 0.5, h: 0.5, type: "doubleJump" },
+            { x: 16, y: 7, w: 1, h: 1, type: "doubleJump" },
 
         ],
         doors: [
@@ -371,7 +371,7 @@ const levels = [
         items: [
             { x: 2.25, y: 1.25, w: 0.5, h: 0.5, type: "key" },
             { x: 23.25, y: 11.25, w: 0.5, h: 0.5, type: "key" },
-            { x: 16.25, y: 7.25, w: 0.5, h: 0.5, type: "doubleJump" },
+            { x: 16, y: 7, w: 1, h: 1, type: "doubleJump" },
 
         ],
         doors: [
@@ -406,7 +406,7 @@ const levels = [
         ],
         items: [
             { x: 8.25, y: 3.25, w: 0.5, h: 0.5, type: "key" },
-            { x: 24.25, y: 10.25, w: 0.5, h: 0.5, type: "doubleJump" },
+            { x: 24, y: 10, w: 1, h: 1, type: "doubleJump" },
             { x: 14.25, y: 7.25, w: 0.5, h: 0.5, type: "key" },
 
         ],

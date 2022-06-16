@@ -153,9 +153,9 @@ class Level {
         });
 
         //  //debug HARDCODED TODO
-        //    this.platforms.forEach(block => {
-        //        block.draw();
-        //    });
+        // this.platforms.forEach(block => {
+        //     block.draw();
+        // });
 
 
         this.door.draw();
