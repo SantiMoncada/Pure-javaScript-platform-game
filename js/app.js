@@ -13,7 +13,7 @@ const platformGame = {
     fps: 60,
     tileSize: undefined,
     bigTileSize: undefined,
-    levelIndex: 9,
+    levelIndex: 0,
     startBoxesPlayerHitBox: [],
     init(canvasId) {
         this.ctx = document.querySelector(canvasId).getContext('2d');
