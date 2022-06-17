@@ -35,7 +35,7 @@ const levels = [
             { x: 30, y: 385, w: 20, h: 20 },
             { x: 50, y: 385, w: 20, h: 20 },
             { x: 60, y: 365, w: 20, h: 20 },
-            
+
         ]
     },
     {
@@ -165,6 +165,37 @@ const levels = [
 
     },
     {
+        title: "doubleJumpIslands",
+        playerStartingPos: { x: 1, y: 10 },
+        foreGround: "./assets/levels/DoubleJumpIslands.png",
+        platforms: [
+            { x: 0, y: 12, w: 8, h: 3 },
+            { x: 0, y: 2, w: 6, h: 0.5 },
+            { x: 12, y: 6, w: 6, h: 0.5 },
+            { x: 14, y: 12, w: 3, h: 0.5 },
+            { x: 24, y: 13, w: 6, h: 2 },
+            { x: 26, y: 7, w: 4, h: 0.5 },
+            { x: 26, y: 2, w: 4, h: 0.5 },
+
+            //outOfBoundsWalls
+            { x: 30, y: -10, w: 2, h: 40 },
+            { x: 0, y: -10, w: 0.1, h: 40 },
+        ],
+        deathBlocks: [
+
+        ],
+        items: [
+            { x: 1, y: 1, w: 0.5, h: 0.5, type: "key" },
+            { x: 15, y: 10, w: 0.5, h: 0.5, type: "key" },
+            { x: 27, y: 11, w: 1, h: 1, type: "doubleJump" },
+
+        ],
+        doors: [
+            { x: 29, y: 0, w: 1, h: 2, color: 'brown', keyNumber: 2 },
+        ],
+        boxes: [],
+    },
+    {
         title: "doubleJump",
         playerStartingPos: { x: 6, y: 10 },
         foreGround: "./assets/levels/doubleJump.png",
@@ -193,37 +224,6 @@ const levels = [
         ],
         doors: [
             { x: 29, y: 1, w: 1, h: 2, color: 'brown', keyNumber: 2 },
-        ],
-        boxes: [],
-    },
-    {
-        title: "doubleJumpIslands",
-        playerStartingPos: { x: 1, y: 10 },
-        foreGround: "./assets/levels/DoubleJumpIslands.png",
-        platforms: [
-            { x: 0, y: 12, w: 8, h: 3 },
-            { x: 0, y: 2, w: 6, h: 0.5 },
-            { x: 12, y: 6, w: 6, h: 0.5 },
-            { x: 14, y: 12, w: 3, h: 0.5 },
-            { x: 24, y: 13, w: 6, h: 2 },
-            { x: 26, y: 7, w: 4, h: 0.5 },
-            { x: 26, y: 2, w: 4, h: 0.5 },
-
-            //outOfBoundsWalls
-            { x: 30, y: -10, w: 2, h: 40 },
-            { x: 0, y: -10, w: 0.1, h: 40 },
-        ],
-        deathBlocks: [
-
-        ],
-        items: [
-            { x: 1, y: 1, w: 0.5, h: 0.5, type: "key" },
-            { x: 15, y: 10, w: 0.5, h: 0.5, type: "key" },
-            { x: 27, y: 11, w: 1, h: 1, type: "doubleJump" },
-
-        ],
-        doors: [
-            { x: 29, y: 0, w: 1, h: 2, color: 'brown', keyNumber: 2 },
         ],
         boxes: [],
     },
