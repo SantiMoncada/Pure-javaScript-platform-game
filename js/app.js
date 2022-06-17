@@ -12,10 +12,10 @@ const platformGame = {
     keysPressed: { up: false, left: false, right: false, previousUp: false },
     fps: 60,
     backgorundForestSound: undefined,
-    soundStarted:false,
+    soundStarted: false,
     tileSize: undefined,
     bigTileSize: undefined,
-    gameDone : false,
+    gameDone: false,
     levelIndex: 0,
     startBoxesPlayerHitBox: [],
     init(canvasId) {
@@ -53,7 +53,7 @@ const platformGame = {
     },
     createEventListeners() {
         document.onkeydown = e => {
-            if (!this.soundStarted){
+            if (!this.soundStarted) {
                 this.backgorundForestSound.play();
                 this.soundStarted = true;
             }
@@ -100,7 +100,7 @@ const platformGame = {
     drawAll() {
         setInterval(() => {
             this.clearAll();
-            if(!this.gameDone){
+            if (!this.gameDone) {
                 this.updateInput();
                 this.level.draw();
 
@@ -123,13 +123,13 @@ const platformGame = {
                     this.levelIndex++;
                     console.log(this.levelIndex);
                     this.finishedLevelSound.play();
-                    if(this.levelIndex < levels.length){
+                    if (this.levelIndex < levels.length) {
                         this.level = new Level(this.ctx, this.canvasSize, this.bigTileSize, this.levelIndex, this.player, this.tileSize);   //TEMP TODO HARDCODED
-                    }else{
+                    } else {
                         this.gameDone = true;
                     }
                 }
-            }else{
+            } else {
                 this.backgorundForestSound.pause();
                 this.endingMusic.play();
                 this.ctx.fillStyle = "black";

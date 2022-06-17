@@ -281,7 +281,7 @@ const levels = [
             { x: 1, y: 3, w: 5, h: 2 },
             { x: 6, y: 2, w: 2, h: 3 },
             { x: 6, y: 8, w: 3, h: 0.5 },
-            { x: 11, y: 0, w: 5, h: 6 },
+            { x: 11, y: -10, w: 5, h: 16 },
             { x: 11, y: 10, w: 2, h: 0.5 },
             { x: 11, y: 14, w: 6, h: 1 },
             { x: 19, y: 6, w: 6, h: 0.5 },
@@ -413,7 +413,7 @@ const levels = [
 
     },
     {
-        title: "longSpikes",
+        title: "jumpSpikes",
         playerStartingPos: { x: 1, y: 10 },
         foreGround: "./assets/levels/jumpSpikemap.png",
         platforms: [
