@@ -1,3 +1,3 @@
 window.onload = () => {
-    platformGame.init('#canvas');
+  platformGame.init("#canvas");
 };
